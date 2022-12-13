@@ -1,0 +1,2 @@
+why we use flutter binding ensurance? WidgetsFlutterBinding.ensureInitialized();
+how does the getx lib works and its use cases
