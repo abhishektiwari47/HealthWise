@@ -1,0 +1,5 @@
+0 Apple
+1 Banana
+2 Carrot
+3 Corn
+4 Cucumber

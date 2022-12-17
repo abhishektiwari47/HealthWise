@@ -39,8 +39,7 @@ class _HomeState extends State<Home> {
 
   loadModel() async {
     await Tflite.loadModel(
-      model:
-          'assets/object_detection_mobile_object_localizer_v1_1_default_1.tflite',
+      model: 'assets/model_unquant.tflite',
       labels: 'assets/labels.txt',
     );
   }
@@ -115,12 +114,12 @@ class _HomeState extends State<Home> {
                       initCamera();
                     },
                     child: Container(
-                        margin: EdgeInsets.only(top: 65),
-                        height: 270,
+                        margin: EdgeInsets.only(top: 5),
+                        height: 550,
                         width: 360,
                         child: imgCamera == null
                             ? Container(
-                                height: 270,
+                                height: 550,
                                 width: 360,
                                 child: Icon(
                                   Icons.photo_camera_front,
@@ -139,14 +138,14 @@ class _HomeState extends State<Home> {
             ),
             Center(
               child: Container(
-                margin: EdgeInsets.only(top: 55.0),
+                margin: EdgeInsets.only(top: 10.0),
                 child: SingleChildScrollView(
                     // controller: controller,
                     child: Text(
                   result,
                   style: const TextStyle(
                       backgroundColor: Colors.black87,
-                      fontSize: 25.0,
+                      fontSize: 10.0,
                       color: Colors.white),
                   textAlign: TextAlign.center,
                 )),
