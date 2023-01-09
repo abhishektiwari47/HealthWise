@@ -1,9 +1,11 @@
+import 'dart:ui';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:flutter/material.dart';
-import 'package:fruit/main.dart';
+import 'package:Healthwise/main.dart';
 import 'package:tflite/tflite.dart';
 
 class Home extends StatefulWidget {
@@ -16,11 +18,12 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   bool isWorking = false;
   String result = '';
+  String finalResult = '';
   CameraController? cameraController;
   CameraImage? imgCamera;
 
   initCamera() {
-    cameraController = CameraController(cameras![0], ResolutionPreset.medium);
+    cameraController = CameraController(cameras![0], ResolutionPreset.max);
     cameraController!.initialize().then((value) {
       if (!mounted) {
         return;
@@ -68,7 +71,7 @@ class _HomeState extends State<Home> {
       imageMean: 127.5,
       imageStd: 127.5,
       rotation: 90,
-      numResults: 2,
+      numResults: 1,
       threshold: 0.1,
       asynch: true,
     );
@@ -79,6 +82,7 @@ class _HomeState extends State<Home> {
           (response['confidence'] as double).toStringAsFixed(2) +
           '\n\n';
     });
+
     setState(() {
       result;
     });
@@ -91,9 +95,10 @@ class _HomeState extends State<Home> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('fruit app getx'),
+          title: Text('HealthWise'),
           backgroundColor: Color.fromARGB(255, 86, 20, 16),
           centerTitle: true,
+          toolbarHeight: 30,
         ),
         body: Container(
           decoration: BoxDecoration(color: Colors.blue),
@@ -138,6 +143,7 @@ class _HomeState extends State<Home> {
             ),
             Center(
               child: Container(
+                color: Colors.red,
                 margin: EdgeInsets.only(top: 10.0),
                 child: SingleChildScrollView(
                     // controller: controller,

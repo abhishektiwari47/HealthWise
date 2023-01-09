@@ -1,6 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:fruit/home.dart';
+import 'package:Healthwise/home.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 List<CameraDescription>? cameras;
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        title: 'Flutter Demo',
+        title: 'Scanning',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
