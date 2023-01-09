@@ -10,32 +10,64 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
+  var snap;
+
   @override
   Widget build(BuildContext context) {
+    DocumentReference docRef = FirebaseFirestore.instance
+        .collection('fruitsAndVegetable')
+        .doc('0 Apple');
+    docRef.get().then((DocumentSnapshot snapshot) async {
+      print('================================================================');
+      print(snapshot.data());
+      if (snapshot.exists) {
+        this.snap = snapshot.data();
+      }
+      print(snap['x']);
+    });
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text("some data"),
-      ),
-      body: Container(
-        child: StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection('fruitsAndVegetable')
-                .snapshots(),
-            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      child: Text(snapshot.data!.docs[index]['id']),
-                    );
-                  },
-                );
-              } else {
-                return Container();
-              }
-            }),
-      ),
-    );
+        appBar: AppBar(
+          title: Text("some data"),
+        ),
+        body: this.snap != null
+            ? Column(
+                children: [
+                  ListTile(
+                    title: Text(snap['x']!),
+                  ),
+                  ListTile(
+                    title: Text(snap['id']!),
+                  ),
+                  ListTile(
+                    title: Text(snap['name']!),
+                  ),
+                ],
+              )
+            : Center(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ));
+    // Container(
+    //   child: StreamBuilder(
+    //       stream: FirebaseFirestore.instance
+    //           .collection('fruitsAndVegetable')
+    //           .snapshots(),
+    //       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+    //         if (snapshot.hasData) {
+    //           return ListView.builder(
+    //             itemCount: snapshot.data!.docs.length,
+    //             itemBuilder: (BuildContext context, int index) {
+    //               return Container(
+    //                 child: Text(snapshot.data!.docs[index]['id']),
+    //               );
+    //             },
+    //           );
+    //         } else {
+    //           return Container();
+    //         }
+    //       }),
+    // ),
   }
 }

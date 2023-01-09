@@ -1,9 +1,5 @@
-import 'dart:ui';
-
+import 'package:Healthwise/list_page.dart';
 import 'package:camera/camera.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
 import 'package:flutter/material.dart';
 import 'package:Healthwise/main.dart';
 import 'package:tflite/tflite.dart';
@@ -158,6 +154,17 @@ class _HomeState extends State<Home> {
                 )),
               ),
             ),
+            ElevatedButton(
+                onPressed: () {
+                  if (result != '') {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const ListPage()));
+                  }
+                },
+                child: Container(
+                  child: Text("Next"),
+                  color: Colors.blue,
+                ))
           ]),
         ),
       ),
