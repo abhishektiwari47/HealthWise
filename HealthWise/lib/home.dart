@@ -82,6 +82,7 @@ class _HomeState extends State<Home> {
         result += response['label'] +
             ' ' +
             (response['confidence'] as double).toStringAsFixed(2);
+        finalResult = result;
       }
     });
 
@@ -151,6 +152,22 @@ class _HomeState extends State<Home> {
                     // controller: controller,
                     child: Text(
                   result,
+                  style: const TextStyle(
+                      backgroundColor: Colors.black87,
+                      fontSize: 10.0,
+                      color: Colors.white),
+                  textAlign: TextAlign.center,
+                )),
+              ),
+            ),
+            Center(
+              child: Container(
+                color: Colors.blue,
+                margin: EdgeInsets.only(top: 10.0),
+                child: SingleChildScrollView(
+                    // controller: controller,
+                    child: Text(
+                  finalResult,
                   style: const TextStyle(
                       backgroundColor: Colors.black87,
                       fontSize: 10.0,
