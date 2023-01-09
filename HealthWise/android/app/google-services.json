@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "635394295218",
+    "firebase_url": "https://healthwise-ccb96-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "healthwise-ccb96",
+    "storage_bucket": "healthwise-ccb96.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635394295218:android:40e847fd3c0068390190ab",
+        "android_client_info": {
+          "package_name": "com.example.fruit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "635394295218-trf51q09afbl271l3qd72321chrubufl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMsyHFI_dGu3_iJhqC3s_FKG65aOxzCnQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "635394295218-trf51q09afbl271l3qd72321chrubufl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -18,7 +18,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   bool isWorking = false;
   String result = '';
-  String finalResult = '';
   CameraController? cameraController;
   CameraImage? imgCamera;
 
@@ -75,14 +74,13 @@ class _HomeState extends State<Home> {
       threshold: 0.1,
       asynch: true,
     );
-    result = '';
+
     racognitions!.forEach((response) {
       var res = response['confidence'] as double;
       if (res > 0.95) {
-        result += response['label'] +
+        result = response['label'] +
             ' ' +
             (response['confidence'] as double).toStringAsFixed(2);
-        finalResult = result;
       }
     });
 
@@ -160,22 +158,6 @@ class _HomeState extends State<Home> {
                 )),
               ),
             ),
-            Center(
-              child: Container(
-                color: Colors.blue,
-                margin: EdgeInsets.only(top: 10.0),
-                child: SingleChildScrollView(
-                    // controller: controller,
-                    child: Text(
-                  finalResult,
-                  style: const TextStyle(
-                      backgroundColor: Colors.black87,
-                      fontSize: 10.0,
-                      color: Colors.white),
-                  textAlign: TextAlign.center,
-                )),
-              ),
-            )
           ]),
         ),
       ),
