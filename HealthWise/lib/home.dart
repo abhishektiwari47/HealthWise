@@ -77,10 +77,12 @@ class _HomeState extends State<Home> {
     );
     result = '';
     racognitions!.forEach((response) {
-      result += response['label'] +
-          ' ' +
-          (response['confidence'] as double).toStringAsFixed(2) +
-          '\n\n';
+      var res = response['confidence'] as double;
+      if (res > 0.95) {
+        result += response['label'] +
+            ' ' +
+            (response['confidence'] as double).toStringAsFixed(2);
+      }
     });
 
     setState(() {
