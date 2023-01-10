@@ -21,26 +21,30 @@ class _ListPageState extends State<ListPage> {
       print('================================================================');
       print(snapshot.data());
       if (snapshot.exists) {
-        this.snap = snapshot.data();
+        snap = snapshot.data();
+        print(snap['x']);
       }
-      print(snap['x']);
     });
+    @override
+    void initState() {
+      super.initState();
+    }
 
     return Scaffold(
         appBar: AppBar(
           title: Text("some data"),
         ),
-        body: this.snap != null
+        body: snap != null
             ? Column(
                 children: [
                   ListTile(
-                    title: Text(snap['x']!),
+                    title: Text(this.snap['x']!.toString()),
                   ),
                   ListTile(
-                    title: Text(snap['id']!),
+                    title: Text(snap['id']!.to),
                   ),
                   ListTile(
-                    title: Text(snap['name']!),
+                    title: Text(snap['name']!.toString()),
                   ),
                 ],
               )
