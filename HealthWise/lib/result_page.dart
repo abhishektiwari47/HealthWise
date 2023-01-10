@@ -1,3 +1,4 @@
+import 'package:Healthwise/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -16,14 +17,13 @@ class _ResultPageState extends State<ResultPage> {
   String y = '';
   String z = '';
   String e = '';
-  List dataAsString = ['', '', ''];
+  List dataAsString = ['', '', '', ''];
 
   @override
   void initState() {
+    super.initState();
     // getUsers();
     getUserById();
-
-    super.initState();
   }
 
   getUserById() {
@@ -33,7 +33,7 @@ class _ResultPageState extends State<ResultPage> {
       y = doc.id;
       z = doc.data().toString();
       String temp = '';
-      // print(doc.data());
+      print(doc.data());
       // print(doc.id);
       int i = 1;
       int j = 0;
@@ -82,10 +82,11 @@ class _ResultPageState extends State<ResultPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(y)),
+      appBar: AppBar(title: Text(dataAsString[0])),
       body: Container(
         child: Column(children: [
           ListTile(
+            leading: Text('Name: '),
             title: Text(dataAsString[0]),
           ),
           ListTile(
@@ -93,6 +94,9 @@ class _ResultPageState extends State<ResultPage> {
           ),
           ListTile(
             title: Text(dataAsString[2]),
+          ),
+          ListTile(
+            title: Text(dataAsString[3]),
           ),
         ]),
       ),

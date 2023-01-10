@@ -1,4 +1,6 @@
 import 'package:Healthwise/list_page.dart';
+import 'package:Healthwise/result_page.dart';
+import 'package:Healthwise/user.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:Healthwise/main.dart';
@@ -21,17 +23,20 @@ class _HomeState extends State<Home> {
     cameraController = CameraController(cameras![0], ResolutionPreset.max);
     cameraController!.initialize().then((value) {
       if (!mounted) {
+        print(
+            'LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL');
         return;
-      }
-      setState(() {
-        cameraController!.startImageStream((imageFromStream) {
-          if (!isWorking) {
-            isWorking = true;
-            imgCamera = imageFromStream;
-            runModelOnStreamFrames();
-          }
+      } else {
+        setState(() {
+          cameraController!.startImageStream((imageFromStream) {
+            if (!isWorking) {
+              isWorking = true;
+              imgCamera = imageFromStream;
+              runModelOnStreamFrames();
+            }
+          });
         });
-      });
+      }
     });
   }
 
@@ -53,7 +58,7 @@ class _HomeState extends State<Home> {
     // TODO: implement dispose
     super.dispose();
     await Tflite.close();
-    cameraController?.dispose();
+    await cameraController?.dispose();
   }
 
   runModelOnStreamFrames() async {
@@ -70,19 +75,22 @@ class _HomeState extends State<Home> {
       threshold: 0.1,
       asynch: true,
     );
-
+    result = '0 Apple';
     racognitions!.forEach((response) {
       var res = response['confidence'] as double;
+
       if (res > 0.95) {
-        result = response['label'] +
-            ' ' +
-            (response['confidence'] as double).toStringAsFixed(2);
+        // result = response['label'];
+        //  +
+        //     ' ' +
+        //     (response['confidence'] as double).toStringAsFixed(2);
       }
     });
-
-    setState(() {
-      result;
-    });
+    if (mounted) {
+      setState(() {
+        result;
+      });
+    }
 
     isWorking = false;
   }
@@ -155,10 +163,12 @@ class _HomeState extends State<Home> {
               ),
             ),
             ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (result != '') {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const ListPage()));
+                    await cameraController?.stopImageStream();
+                    await cameraController?.pausePreview();
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => ResultPage()));
                   }
                 },
                 child: Container(

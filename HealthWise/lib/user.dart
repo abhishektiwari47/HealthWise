@@ -15,3 +15,5 @@ class User {
     x = json['x'];
   }
 }
+
+String itemName = '';

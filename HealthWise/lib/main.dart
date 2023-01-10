@@ -23,6 +23,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: ResultPage());
+        home: Home());
   }
 }
