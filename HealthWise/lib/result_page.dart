@@ -27,7 +27,7 @@ class _ResultPageState extends State<ResultPage> {
   }
 
   getUserById() {
-    final String id = '0 Apple';
+    final String id = itemName;
     userRef.doc(id).get().then((DocumentSnapshot doc) {
       final x = doc.data();
       y = doc.id;

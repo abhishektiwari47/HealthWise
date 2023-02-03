@@ -16,6 +16,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   bool isWorking = false;
   String result = '';
+
   CameraController? cameraController;
   CameraImage? imgCamera;
 
@@ -75,12 +76,12 @@ class _HomeState extends State<Home> {
       threshold: 0.1,
       asynch: true,
     );
-    result = '0 Apple';
+
     racognitions!.forEach((response) {
       var res = response['confidence'] as double;
 
       if (res > 0.95) {
-        // result = response['label'];
+        result = response['label'];
         //  +
         //     ' ' +
         //     (response['confidence'] as double).toStringAsFixed(2);
@@ -167,6 +168,9 @@ class _HomeState extends State<Home> {
                   if (result != '') {
                     await cameraController?.stopImageStream();
                     await cameraController?.pausePreview();
+                    itemName = result.toString();
+                    print("--------------------------------------------");
+                    print(itemName);
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => ResultPage()));
                   }
