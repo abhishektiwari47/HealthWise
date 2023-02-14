@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-final userRef = FirebaseFirestore.instance.collection('fruitsAndVegetable');
+import '../helpers/backEnd.dart';
+import '../helpers/frontEnd.dart';
 
 class ResultPage extends StatefulWidget {
   const ResultPage({Key? key}) : super(key: key);
@@ -82,11 +83,11 @@ class _ResultPageState extends State<ResultPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(dataAsString[0])),
+      appBar:
+          AppBar(backgroundColor: primary_color, title: Text(dataAsString[0])),
       body: Container(
         child: Column(children: [
           ListTile(
-            leading: Text('Name: '),
             title: Text(dataAsString[0]),
           ),
           ListTile(

@@ -1,10 +1,12 @@
-import 'package:Healthwise/list_page.dart';
-import 'package:Healthwise/result_page.dart';
+import 'package:Healthwise/pages/listPage.dart';
+import 'package:Healthwise/pages/resultPage.dart';
 import 'package:Healthwise/user.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:Healthwise/main.dart';
 import 'package:tflite/tflite.dart';
+
+import '../helpers/frontEnd.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -24,8 +26,7 @@ class _HomeState extends State<Home> {
     cameraController = CameraController(cameras![0], ResolutionPreset.max);
     cameraController!.initialize().then((value) {
       if (!mounted) {
-        print(
-            'LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL');
+        print("Camera Not Mounted");
         return;
       } else {
         setState(() {
@@ -100,14 +101,19 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('HealthWise'),
-          backgroundColor: Color.fromARGB(255, 86, 20, 16),
-          centerTitle: true,
-          toolbarHeight: 30,
-        ),
+        appBar: AppBar(backgroundColor: primary_color, title: application_name),
+
+        //     body: Container(
+        //   constraints: BoxConstraints.expand(),
+        //   decoration: const BoxDecoration(
+        //     image: DecorationImage(
+        //         image: AssetImage("assets/SVG/MainBackground.png"),
+        //         fit: BoxFit.fill),
+        //   ),
+        // )
+
         body: Container(
-          decoration: BoxDecoration(color: Colors.blue),
+          decoration: BoxDecoration(),
           child: Column(children: [
             Stack(
               children: [
@@ -149,7 +155,7 @@ class _HomeState extends State<Home> {
             ),
             Center(
               child: Container(
-                color: Colors.red,
+                color: primary_color,
                 margin: EdgeInsets.only(top: 10.0),
                 child: SingleChildScrollView(
                     // controller: controller,
