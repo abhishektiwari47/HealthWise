@@ -18,6 +18,15 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(home: Home());
+    return MaterialApp(
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+          textSelectionTheme: const TextSelectionThemeData(
+            cursorColor: Color.fromARGB(255, 253, 126, 153),
+            selectionColor: Color.fromARGB(255, 253, 126, 153),
+            selectionHandleColor: Color.fromARGB(255, 253, 126, 153),
+          ),
+        ),
+        home: Home());
   }
 }
