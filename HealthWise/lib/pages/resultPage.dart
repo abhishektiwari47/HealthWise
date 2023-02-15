@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-
 import '../helpers/backEnd.dart';
 import '../helpers/frontEnd.dart';
 
@@ -15,11 +14,10 @@ class ResultPage extends StatefulWidget {
 }
 
 class _ResultPageState extends State<ResultPage> {
-  String y = '';
-  String z = '';
+  // String docId = '';
+  String objectToString = '';
   String e = '';
   List dataAsString = ['', '', '', ''];
-
   @override
   void initState() {
     super.initState();
@@ -30,21 +28,22 @@ class _ResultPageState extends State<ResultPage> {
   getUserById() {
     final String id = itemName;
     userRef.doc(id).get().then((DocumentSnapshot doc) {
-      final x = doc.data();
-      y = doc.id;
-      z = doc.data().toString();
+      // final x = doc.data();
+      // docId= doc.id;
+      objectToString = doc.data().toString();
       String temp = '';
-      print(doc.data());
+      // print(doc.data());
       // print(doc.id);
       int i = 1;
       int j = 0;
       bool end = false;
-      while (z[i] != '}') {
-        if (z[i - 1] == ' ' && z[i - 2] == ':') {
-          while (z[i] != ',' && end != true) {
+      //We are just parsing the object into string.
+      while (objectToString[i] != '}') {
+        if (objectToString[i - 1] == ' ' && objectToString[i - 2] == ':') {
+          while (objectToString[i] != ',' && end != true) {
             // print(z[i]);
-            temp += z[i];
-            if (z[i + 1] != '}') {
+            temp += objectToString[i];
+            if (objectToString[i + 1] != '}') {
               i++;
             } else {
               end = true;
@@ -54,7 +53,6 @@ class _ResultPageState extends State<ResultPage> {
           temp = '';
           j++;
         }
-
         i++;
       }
       // print(dataAsString[0]);
