@@ -1,8 +1,6 @@
 import 'package:Healthwise/helpers/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import '../helpers/backEnd.dart';
 import '../helpers/frontEnd.dart';
 
@@ -16,8 +14,10 @@ class ResultPage extends StatefulWidget {
 class _ResultPageState extends State<ResultPage> {
   // String docId = '';
   String objectToString = '';
-  String e = '';
-  List dataAsString = ['', '', '', ''];
+
+  // List of string for storing..
+  var dataAsString = <String>[];
+
   @override
   void initState() {
     super.initState();
@@ -27,7 +27,7 @@ class _ResultPageState extends State<ResultPage> {
 
   getUserById() {
     final String id = itemName;
-    userRef.doc(id).get().then((DocumentSnapshot doc) {
+    fruitInfoDoc.doc(id).get().then((DocumentSnapshot doc) {
       // final x = doc.data();
       // docId= doc.id;
       objectToString = doc.data().toString();
@@ -35,13 +35,12 @@ class _ResultPageState extends State<ResultPage> {
       // print(doc.data());
       // print(doc.id);
       int i = 1;
-      int j = 0;
+
       bool end = false;
       //We are just parsing the object into string.
       while (objectToString[i] != '}') {
         if (objectToString[i - 1] == ' ' && objectToString[i - 2] == ':') {
           while (objectToString[i] != ',' && end != true) {
-            // print(z[i]);
             temp += objectToString[i];
             if (objectToString[i + 1] != '}') {
               i++;
@@ -49,16 +48,17 @@ class _ResultPageState extends State<ResultPage> {
               end = true;
             }
           }
-          dataAsString[j] = temp;
+          //Here I add all the strings to list...
+          // This line works fine.
+          dataAsString.add(temp);
           temp = '';
-          j++;
+          print("The code below this line prints everything perfectly");
+          print(dataAsString.length);
+          print(dataAsString[0]);
         }
         i++;
       }
       // print(dataAsString[0]);
-      // print(dataAsString[1]);
-      // print("+++++++++++");
-      // print(dataAsString[2]);
       // for (var k in dataAsString) {
       //   print(k);
       // }
@@ -81,23 +81,27 @@ class _ResultPageState extends State<ResultPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-          AppBar(backgroundColor: primary_color, title: Text(dataAsString[0])),
-      body: Container(
-        child: Column(children: [
-          ListTile(
-            title: Text(dataAsString[0]),
-          ),
-          ListTile(
-            title: Text(dataAsString[1]),
-          ),
-          ListTile(
-            title: Text(dataAsString[2]),
-          ),
-          ListTile(
-            title: Text(dataAsString[3]),
-          ),
-        ]),
+      appBar: AppBar(backgroundColor: primary_color, title: Text("Apple")),
+      body: Builder(
+        builder: (context) {
+          if (dataAsString.length >= 2) {
+            return ListView(children: [
+              ListTile(
+                title: Text(dataAsString[0]),
+              ),
+              ListTile(
+                title: Text(dataAsString[1]),
+              ),
+              ListTile(
+                title: Text(dataAsString[2]),
+              ),
+            ]);
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }
