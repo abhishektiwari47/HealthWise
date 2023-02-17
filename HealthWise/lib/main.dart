@@ -35,6 +35,6 @@ class MyApp extends StatelessWidget {
             selectionHandleColor: Color.fromARGB(255, 253, 126, 153),
           ),
         ),
-        home: SplashScreen());
+        home: Home());
   }
 }

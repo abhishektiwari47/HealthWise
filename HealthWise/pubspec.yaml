@@ -20,6 +20,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  flutter_native_splash: ^2.2.17
 
 
 flutter:
@@ -27,5 +28,10 @@ flutter:
   assets: 
     - assets/
     - assets/SVG/
+
+flutter_native_splash:
+  image: assets/SVG/BackButton.png
+  color: 42a5f5
+
 
   
