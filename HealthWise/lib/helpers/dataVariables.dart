@@ -17,3 +17,5 @@ class User {
 }
 
 String itemName = '';
+
+List<String> CardFruitList = ["Apple", "Banana", "Carrot"];

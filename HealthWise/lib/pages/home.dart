@@ -1,12 +1,14 @@
+import 'dart:math';
 import 'package:Healthwise/helpers/backEnd.dart';
 import 'package:Healthwise/pages/listPage.dart';
 import 'package:Healthwise/pages/resultPage.dart';
-import 'package:Healthwise/helpers/user.dart';
+import 'package:Healthwise/helpers/dataVariables.dart';
 import 'package:camera/camera.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:Healthwise/main.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:tflite/tflite.dart';
 import '../helpers/frontEnd.dart';
 
@@ -67,11 +69,15 @@ class _HomeState extends State<Home> {
 
   getUserById() async {
     print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-    final String id = 'Apple';
+    var randomNumber = Random().nextInt(3);
+    print("randomNumber" + randomNumber.toString());
+    String id = CardFruitList[randomNumber];
+    print(id);
     await fruitQuoteDoc.doc(id).get().then((DocumentSnapshot doc) {
       // final x = doc.data();
       // docId= doc.id;
       objectToString = doc.data().toString();
+      print(objectToString);
       String temp = '';
       // print(doc.data());
       // print(doc.id);
@@ -92,21 +98,24 @@ class _HomeState extends State<Home> {
           //Here I add all the strings to list...
           // This line works fine.
           dataAsString.add(temp);
+
           temp = '';
-          print(
-              "######################The code below works fine########################");
-          print(dataAsString.length);
-          print(dataAsString[0]);
+          // print(dataAsString.length);
+          // print(dataAsString[0]);
         }
         i++;
       }
+      end = false;
       // print(dataAsString[0]);
       // for (var k in dataAsString) {
       //   print(k);
       // }
-      // print(dataAsString);
-      print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+      print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%the data%%%%%%%%%%%%%%%%%%%%%%%");
+      print(dataAsString);
+
+      id = '';
       setState(() {});
+      print('^^^^^^^^^^^^^^^^^^^^^^^^^^SetStateCalled^^^^^^^^^^^^^^^^^^^^^^^');
     });
   }
 
@@ -181,96 +190,104 @@ class _HomeState extends State<Home> {
                     height: 650,
                     width: 360,
                     child: imgCamera == null
-                        ? Builder(builder: (context) {
-                            print(
-                                '###############BuilderBhaiya######################');
-
-                            if (dataAsString.length > 0) {
-                              return Column(
-                                children: [
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  SearchBar(),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  Center(
-                                      child: Container(
-                                    height: 500,
-                                    width: 340,
-                                    decoration: const BoxDecoration(
-                                      color: Color(0xFFffffff),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey,
-                                          blurRadius: 2.0, // soften the shadow
-                                          spreadRadius: 2.0, //extend the shadow
-                                        )
-                                      ],
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 50,
-                                          width: double.infinity,
-                                          color: Color.fromARGB(
-                                              255, 253, 126, 153),
-                                          child: Center(
-                                            child: Text(
-                                              dataAsString[2],
-                                              style: TextStyle(
-                                                color: Color.fromARGB(
-                                                    255, 255, 255, 255),
-                                                fontSize: 25,
+                        ? Column(
+                            children: [
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              SearchBar(),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Builder(builder: (context) {
+                                print(
+                                    "***************builderbhai************************");
+                                if (dataAsString.length > 0) {
+                                  return Center(
+                                      child: GestureDetector(
+                                    onDoubleTap: () => {
+                                      dataAsString.clear(),
+                                      getUserById(),
+                                    },
+                                    child: Container(
+                                      height: 500,
+                                      width: 340,
+                                      decoration: const BoxDecoration(
+                                        color: Color(0xFFffffff),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey,
+                                            blurRadius:
+                                                2.0, // soften the shadow
+                                            spreadRadius:
+                                                2.0, //extend the shadow
+                                          )
+                                        ],
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 50,
+                                            width: double.infinity,
+                                            color: Color.fromARGB(
+                                                255, 253, 126, 153),
+                                            child: Center(
+                                              child: Text(
+                                                dataAsString[2],
+                                                style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 255, 255, 255),
+                                                  fontSize: 25,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        Container(
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                height: 225,
-                                                width: double.infinity,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                    fit: BoxFit.fill,
-                                                    image: NetworkImage(
-                                                        dataAsString[0]),
+                                          Container(
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  height: 225,
+                                                  width: double.infinity,
+                                                  decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                      fit: BoxFit.fill,
+                                                      image: NetworkImage(
+                                                          dataAsString[0]),
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                              Container(
-                                                margin: EdgeInsets.symmetric(
-                                                    vertical: 30,
-                                                    horizontal: 30),
-                                                child: Text(
-                                                  dataAsString[1],
-                                                  style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 80, 80, 80),
-                                                    fontSize: 20,
+                                                Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical: 30,
+                                                      horizontal: 30),
+                                                  child: Text(
+                                                    dataAsString[1],
+                                                    style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 80, 80, 80),
+                                                      fontSize: 20,
+                                                    ),
                                                   ),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
+                                                )
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  )),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                ],
-                              );
-                            } else {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            }
-                          })
+                                  ));
+                                } else {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                }
+                                ;
+                              }),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          )
                         : AspectRatio(
                             aspectRatio: cameraController!.value.aspectRatio,
                             child: CameraPreview(cameraController!),
