@@ -482,6 +482,20 @@ class _HomeState extends State<Home> {
             height: 40,
             width: 240,
             child: TextField(
+              textInputAction: TextInputAction.search,
+              onSubmitted: (term) async {
+                print("##########################################" +
+                    searchItem.text);
+                result = searchItem.text;
+
+                if (result != '') {
+                  print("##########################################" + result);
+                  itemName = result;
+                  print(itemName);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ResultPage()));
+                }
+              },
               controller: searchItem,
               decoration: InputDecoration(
                   border: InputBorder.none, hintText: 'Search Pomegranate'),
