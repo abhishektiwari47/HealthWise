@@ -145,7 +145,7 @@ class _HomeState extends State<Home> {
     racognitions!.forEach((response) {
       var res = response['confidence'] as double;
 
-      if (res > 0.95) {
+      if (res > 0.99) {
         result = response['label'];
         result = result.substring(2, result.length);
 
