@@ -1,5 +1,3 @@
-import 'package:Healthwise/pages/listPage.dart';
-import 'package:Healthwise/pages/resultPage.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
