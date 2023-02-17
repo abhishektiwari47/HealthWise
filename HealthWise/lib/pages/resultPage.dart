@@ -1,6 +1,7 @@
 import 'package:Healthwise/helpers/dataVariables.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import '../helpers/backEnd.dart';
 import '../helpers/frontEnd.dart';
 
@@ -26,7 +27,7 @@ class _ResultPageState extends State<ResultPage> {
   }
 
   getUserById() {
-    final String id = itemName;
+    final String id = itemName.toLowerCase().trim();
     fruitInfoDoc.doc(id).get().then((DocumentSnapshot doc) {
       // final x = doc.data();
       // docId= doc.id;
@@ -69,8 +70,8 @@ class _ResultPageState extends State<ResultPage> {
   }
 
   // getUsers() {
-  //   userRef.get().then((QuerySnapshot snapshot) {
-  //     snapshot.docs.forEach((DocumentSnapshot doc) {
+  //       userRef.get().then((QuerySnapshot snapshot) {
+  //       snapshot.docs.forEach((DocumentSnapshot doc) {
   //       print(doc.data());
   //       print(doc.id);
   //       print(doc.exists);
@@ -80,28 +81,34 @@ class _ResultPageState extends State<ResultPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(backgroundColor: primary_color, title: Text("Apple")),
-      body: Builder(
-        builder: (context) {
-          if (dataAsString.length >= 2) {
-            return ListView(children: [
-              ListTile(
-                title: Text(dataAsString[0]),
-              ),
-              ListTile(
-                title: Text(dataAsString[1]),
-              ),
-              ListTile(
-                title: Text(dataAsString[2]),
-              ),
-            ]);
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pop(context);
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(backgroundColor: primary_color, title: Text("Apple")),
+        body: Builder(
+          builder: (context) {
+            if (dataAsString.length > 0) {
+              return ListView(children: [
+                ListTile(
+                  title: Text(dataAsString[0]),
+                ),
+                ListTile(
+                  title: Text(dataAsString[1]),
+                ),
+                ListTile(
+                  title: Text(dataAsString[2]),
+                ),
+              ]);
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
       ),
     );
   }

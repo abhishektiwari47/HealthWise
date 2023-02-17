@@ -147,6 +147,8 @@ class _HomeState extends State<Home> {
 
       if (res > 0.95) {
         result = response['label'];
+        result = result.substring(2, result.length);
+
         //  +
         //     ' ' +
         //     (response['confidence'] as double).toStringAsFixed(2);
@@ -422,8 +424,11 @@ class _HomeState extends State<Home> {
               await cameraController?.pausePreview();
               itemName = result.toString();
               print(itemName);
-              Navigator.of(context).pushReplacement(
+              imgCamera = null;
+
+              await Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ResultPage()));
+              setState(() {});
             }
           },
           child: Image(
@@ -494,7 +499,7 @@ class _HomeState extends State<Home> {
                 print("##########################################" + result);
                 itemName = result;
                 print(itemName);
-                Navigator.of(context).pushReplacement(
+                Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ResultPage()));
               }
             },
