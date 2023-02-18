@@ -182,7 +182,7 @@ class _HomeState extends State<Home> {
                 constraints: const BoxConstraints.expand(),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("assets/SVG/MainBackground.png"),
+                      image: AssetImage("assets/SVG/BackGround2.png"),
                       fit: BoxFit.fill),
                 ),
               ),
@@ -441,19 +441,22 @@ class _HomeState extends State<Home> {
 
   // Camera Open
 
-  TextButton CameraOpeningButton() {
-    return TextButton(
-      style: TextButton.styleFrom(
-        foregroundColor: Colors.pink,
-        // splashFactory: NoSplash.splashFactory,
-      ),
-      onPressed: () {
-        initCamera();
-      },
-      child: Image(
-        image: AssetImage('assets/SVG/CameraButton.png'),
-        height: 60,
-        width: 60,
+  Padding CameraOpeningButton() {
+    return Padding(
+      padding: const EdgeInsets.all(30.0),
+      child: TextButton(
+        style: TextButton.styleFrom(
+          foregroundColor: Color(0xFFE91E63),
+          // splashFactory: NoSplash.splashFactory,
+        ),
+        onPressed: () {
+          initCamera();
+        },
+        child: Image(
+          image: AssetImage('assets/SVG/CameraButton.png'),
+          height: 60,
+          width: 60,
+        ),
       ),
     );
   }

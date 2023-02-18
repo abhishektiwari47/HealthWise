@@ -14,6 +14,7 @@ dependencies:
   cloud_firestore: ^4.0.5
   firebase_core: ^2.2.0
   firebase_storage: ^11.0.5
+  flutter_icons: 1.1.0
   # flutter_native_splash: ^2.2.17
 
 dev_dependencies:
@@ -30,8 +31,9 @@ flutter:
     - assets/SVG/
 
 flutter_native_splash:
-  image: assets/SVG/BackButton.png
-  color: 42a5f5
+  image: assets/SVG/logo.png
+  color: FFC0CB
+
 
 
   

@@ -1,10 +1,8 @@
-import 'package:Healthwise/pages/splashScreen.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:Healthwise/pages/home.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 List<CameraDescription>? cameras;
 Future<void> main() async {
