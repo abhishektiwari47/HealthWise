@@ -21,12 +21,12 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           // We have removed the appbar
-          // appBarTheme: const AppBarTheme(
-          //   systemOverlayStyle: SystemUiOverlayStyle(
-          //       statusBarColor: Colors.white,
-          //       statusBarBrightness: Brightness.light),
-          // ),
-          scaffoldBackgroundColor: Colors.white,
+          appBarTheme: const AppBarTheme(
+            systemOverlayStyle: SystemUiOverlayStyle(
+                // statusBarColor: Color.fromARGB(255, 255, 177, 177),
+                statusBarBrightness: Brightness.light),
+          ),
+          // scaffoldBackgroundColor: Colors.white,
           textSelectionTheme: const TextSelectionThemeData(
             cursorColor: Color.fromARGB(255, 253, 126, 153),
             selectionColor: Color.fromARGB(255, 199, 182, 186),

@@ -67,10 +67,15 @@ class _HomeState extends State<Home> {
     loadModel();
   }
 
+  int randomNumber1 = Random().nextInt(3);
   getUserById() async {
-    print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-    var randomNumber = Random().nextInt(3);
-    print("randomNumber" + randomNumber.toString());
+    // print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+    int randomNumber = Random().nextInt(3);
+    while (randomNumber == randomNumber1) {
+      randomNumber = Random().nextInt(3);
+    }
+    randomNumber1 = randomNumber;
+    // print("randomNumber" + randomNumber.toString());
     String id = CardFruitList[randomNumber];
     print(id);
     await fruitQuoteDoc.doc(id).get().then((DocumentSnapshot doc) {
@@ -172,7 +177,11 @@ class _HomeState extends State<Home> {
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: imgCamera == null
-              ? CameraOpeningButton()
+              ? FloatingButtons(
+                  callFunction: () {
+                    initCamera();
+                  },
+                  floatingIcon: Icons.camera)
               : CloseCameraAndSearch(cameraController),
           // appBar:
           //     AppBar(backgroundColor: primary_color, title: application_name),
@@ -181,6 +190,7 @@ class _HomeState extends State<Home> {
               Container(
                 constraints: const BoxConstraints.expand(),
                 decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 255, 232, 244),
                   image: DecorationImage(
                       image: AssetImage("assets/SVG/BackGround2.png"),
                       fit: BoxFit.fill),
@@ -189,7 +199,7 @@ class _HomeState extends State<Home> {
               Container(
                 // height: 560,
                 child: Container(
-                    height: 650,
+                    height: double.infinity,
                     width: 360,
                     child: imgCamera == null
                         ? Column(
@@ -197,7 +207,88 @@ class _HomeState extends State<Home> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              SearchBar(),
+                              Container(
+                                height: 50,
+                                width: 340,
+                                padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
+                                decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  //
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 253, 209, 209),
+                                      blurRadius: 3.0, // soften the shadow
+                                      spreadRadius: 3.0, //extend the shadow
+                                    )
+                                  ],
+                                ),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 240,
+                                      child: TextField(
+                                        textInputAction: TextInputAction.search,
+                                        onSubmitted: (term) async {
+                                          print(
+                                              "##########################################" +
+                                                  searchItem.text);
+                                          result = searchItem.text;
+
+                                          if (result != '') {
+                                            print(
+                                                "##########################################" +
+                                                    result);
+                                            itemName = result;
+                                            print(itemName);
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ResultPage()));
+                                          }
+                                        },
+                                        controller: searchItem,
+                                        decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: 'Search Pomegranate'),
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    TextButton(
+                                      style: ButtonStyle(
+                                          alignment:
+                                              AlignmentDirectional.centerEnd),
+                                      onPressed: () async {
+                                        print(
+                                            "##########################################" +
+                                                searchItem.text);
+                                        result = searchItem.text;
+
+                                        if (result != '') {
+                                          print(
+                                              "##########################################" +
+                                                  result);
+                                          itemName = result;
+                                          print(itemName);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ResultPage()));
+                                        }
+                                      },
+                                      child: Icon(
+                                        Icons.search,
+                                        color:
+                                            Color.fromARGB(255, 253, 126, 153),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
                               const SizedBox(
                                 height: 20,
                               ),
@@ -211,72 +302,8 @@ class _HomeState extends State<Home> {
                                       dataAsString.clear(),
                                       getUserById(),
                                     },
-                                    child: Container(
-                                      height: 500,
-                                      width: 340,
-                                      decoration: const BoxDecoration(
-                                        color: Color(0xFFffffff),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey,
-                                            blurRadius:
-                                                2.0, // soften the shadow
-                                            spreadRadius:
-                                                2.0, //extend the shadow
-                                          )
-                                        ],
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 50,
-                                            width: double.infinity,
-                                            color: Color.fromARGB(
-                                                255, 253, 126, 153),
-                                            child: Center(
-                                              child: Text(
-                                                dataAsString[2],
-                                                style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 255, 255, 255),
-                                                  fontSize: 25,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  height: 225,
-                                                  width: double.infinity,
-                                                  decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                      fit: BoxFit.fill,
-                                                      image: NetworkImage(
-                                                          dataAsString[0]),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  margin: EdgeInsets.symmetric(
-                                                      vertical: 30,
-                                                      horizontal: 30),
-                                                  child: Text(
-                                                    dataAsString[1],
-                                                    style: TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 80, 80, 80),
-                                                      fontSize: 20,
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
+                                    child:
+                                        FruitCard(dataAsString: dataAsString),
                                   ));
                                 } else {
                                   return const Center(
@@ -377,24 +404,55 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Padding FloatingButtons(
+      {required callFunction, required IconData floatingIcon}) {
+    return Padding(
+      padding: const EdgeInsets.all(30.0),
+      child: Container(
+        height: 50,
+        width: 50,
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+            // color: Colors.blue,
+            // borderRadius: BorderRadius.all(
+            //   Radius.circular(30),
+            // ),
+            ),
+        child: Center(
+          child: Material(
+            clipBehavior: Clip.hardEdge,
+            borderRadius: BorderRadius.all(Radius.circular(50)),
+            color: Colors.pink,
+            child: IconButton(
+                iconSize: 30,
+                splashRadius: 120,
+                splashColor: Color.fromARGB(255, 255, 223, 223),
+                // tooltip: 'Opening Camera',
+                icon: Icon(
+                  floatingIcon,
+                  color: Color.fromARGB(255, 255, 254, 254),
+                ),
+                onPressed: () {
+                  callFunction();
+                }),
+          ),
+        ),
+      ),
+    );
+  }
+
   Row CloseCameraAndSearch(CameraController? cameraController) =>
       Row(children: [
 //Camera Close
-        TextButton(
-          style: TextButton.styleFrom(foregroundColor: Colors.pink),
-          onPressed: () async {
-            await cameraController?.stopImageStream();
-            await cameraController?.pausePreview();
-            result = '';
-            imgCamera = null;
-            setState(() {});
-          },
-          child: Image(
-            image: AssetImage('assets/SVG/CloseCamera.png'),
-            height: 60,
-            width: 60,
-          ),
-        ),
+        FloatingButtons(
+            callFunction: () async {
+              await cameraController?.stopImageStream();
+              await cameraController?.pausePreview();
+              result = '';
+              imgCamera = null;
+              setState(() {});
+            },
+            floatingIcon: Icons.clear),
 
 //Result
         Spacer(),
@@ -415,118 +473,25 @@ class _HomeState extends State<Home> {
 
 //Camera Close Next Page
         Spacer(),
-        TextButton(
-          style: TextButton.styleFrom(foregroundColor: Colors.pink),
-          onPressed: () async {
-            if (result != '') {
-              print("##########################################" + result);
-              await cameraController?.stopImageStream();
-              await cameraController?.pausePreview();
-              itemName = result.toString();
-              print(itemName);
-              imgCamera = null;
+        FloatingButtons(
+            callFunction: () async {
+              if (result != '') {
+                print("##########################################" + result);
+                await cameraController?.stopImageStream();
+                await cameraController?.pausePreview();
+                itemName = result.toString();
+                print(itemName);
+                imgCamera = null;
 
-              await Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ResultPage()));
-              setState(() {});
-            }
-          },
-          child: Image(
-            image: AssetImage('assets/SVG/SearchFruitButton.png'),
-            height: 60,
-            width: 60,
-          ),
-        )
+                await Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ResultPage()));
+                setState(() {});
+              }
+            },
+            floatingIcon: Icons.search)
       ]);
 
   // Camera Open
 
-  Padding CameraOpeningButton() {
-    return Padding(
-      padding: const EdgeInsets.all(30.0),
-      child: TextButton(
-        style: TextButton.styleFrom(
-          foregroundColor: Color(0xFFE91E63),
-          // splashFactory: NoSplash.splashFactory,
-        ),
-        onPressed: () {
-          initCamera();
-        },
-        child: Image(
-          image: AssetImage('assets/SVG/CameraButton.png'),
-          height: 60,
-          width: 60,
-        ),
-      ),
-    );
-  }
-
 //SearchBar
-  Container SearchBar() {
-    return Container(
-      height: 50,
-      width: 340,
-      padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        //
-        color: Color.fromARGB(255, 255, 255, 255),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            blurRadius: 2.0, // soften the shadow
-            spreadRadius: 2.0, //extend the shadow
-          )
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            height: 40,
-            width: 240,
-            child: TextField(
-              textInputAction: TextInputAction.search,
-              onSubmitted: (term) async {
-                print("##########################################" +
-                    searchItem.text);
-                result = searchItem.text;
-
-                if (result != '') {
-                  print("##########################################" + result);
-                  itemName = result;
-                  print(itemName);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ResultPage()));
-                }
-              },
-              controller: searchItem,
-              decoration: InputDecoration(
-                  border: InputBorder.none, hintText: 'Search Pomegranate'),
-            ),
-          ),
-          Spacer(),
-          TextButton(
-            style: ButtonStyle(alignment: AlignmentDirectional.centerEnd),
-            onPressed: () async {
-              print("##########################################" +
-                  searchItem.text);
-              result = searchItem.text;
-
-              if (result != '') {
-                print("##########################################" + result);
-                itemName = result;
-                print(itemName);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ResultPage()));
-              }
-            },
-            child: Icon(
-              Icons.search,
-              color: Color.fromARGB(255, 253, 126, 153),
-            ),
-          )
-        ],
-      ),
-    );
-  }
 }

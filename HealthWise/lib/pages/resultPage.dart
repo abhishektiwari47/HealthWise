@@ -27,7 +27,8 @@ class _ResultPageState extends State<ResultPage> {
   }
 
   getUserById() {
-    final String id = itemName.toLowerCase().trim();
+    String id = itemName.toLowerCase().trim();
+
     fruitInfoDoc.doc(id).get().then((DocumentSnapshot doc) {
       // final x = doc.data();
       // docId= doc.id;
@@ -55,29 +56,14 @@ class _ResultPageState extends State<ResultPage> {
           temp = '';
           print("The code below this line prints everything perfectly");
           print(dataAsString.length);
-          print(dataAsString[0]);
+          print(dataAsString);
         }
         i++;
       }
-      // print(dataAsString[0]);
-      // for (var k in dataAsString) {
-      //   print(k);
-      // }
-      // print(dataAsString);
 
       setState(() {});
     });
   }
-
-  // getUsers() {
-  //       userRef.get().then((QuerySnapshot snapshot) {
-  //       snapshot.docs.forEach((DocumentSnapshot doc) {
-  //       print(doc.data());
-  //       print(doc.id);
-  //       print(doc.exists);
-  //     });
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -87,27 +73,126 @@ class _ResultPageState extends State<ResultPage> {
         return false;
       },
       child: Scaffold(
-        appBar: AppBar(backgroundColor: primary_color, title: Text("Apple")),
-        body: Builder(
-          builder: (context) {
-            if (dataAsString.length > 0) {
-              return ListView(children: [
-                ListTile(
-                  title: Text(dataAsString[0]),
+        appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Color.fromARGB(255, 35, 128, 39),
+            title: Center(
+              child: Text(
+                itemName.trim().toUpperCase(),
+                style: TextStyle(
+                    //Fruit Name
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 15),
+              ),
+            )),
+        body: SingleChildScrollView(
+          physics: ScrollPhysics(),
+          child: Container(
+            // color: Color.fromARGB(255, 73, 122, 76),
+            height: MediaQuery.of(context).size.height * 2.5,
+            child: Column(
+              children: [
+                Container(
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 10,
+                        width: 30,
+                        color: Colors.red,
+                      ),
+                    ],
+                  ),
+                  color: Color.fromARGB(255, 150, 50, 50),
+                  height: 200,
+                  width: double.infinity,
                 ),
-                ListTile(
-                  title: Text(dataAsString[1]),
+                Expanded(
+                  child: Builder(
+                    builder: (context) {
+                      if (dataAsString.length > 0) {
+                        return ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: dataAsString.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return EditedListTile(
+                                dataAsString: dataAsString,
+                                index: index,
+                              );
+                            });
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
+                  ),
                 ),
-                ListTile(
-                  title: Text(dataAsString[2]),
-                ),
-              ]);
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class EditedListTile extends StatelessWidget {
+  const EditedListTile(
+      {super.key, required this.dataAsString, required this.index});
+
+  final List<String> dataAsString;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(5, 1, 5, 0),
+      child: ListTile(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          // side: BorderSide(
+          //   width: 1.5,
+          //   //Tile Border
+          //   color: Color.fromARGB(255, 255, 227, 227),
+          // ),
+        ),
+
+        contentPadding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+        subtitle: Text(
+          "per 100 gram",
+          style: TextStyle(
+            //subtitle
+            color: Color.fromARGB(255, 255, 184, 184),
+          ),
+        ),
+        //Tile Color
+        tileColor: Color.fromARGB(255, 146, 60, 74),
+        leading: Container(
+            height: 30,
+            width: 30,
+            decoration: BoxDecoration(
+                color: Color.fromARGB(255, 255, 255, 255),
+                borderRadius: BorderRadius.all(Radius.circular(15))),
+            child: Center(
+                child: Text(
+              (index + 1).toString(),
+              style: TextStyle(
+                  //index
+                  color: Color.fromARGB(255, 146, 60, 74),
+                  fontSize: 15),
+            ))),
+        // trailing: const Text(
+        //   "per 100g",
+        //   style: TextStyle(
+        //       color: Color.fromARGB(255, 85, 141, 87),
+        //       fontSize: 15),
+        // ),
+        title: Text(
+          dataAsString[index],
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 255, 255, 255),
+              fontSize: 18),
         ),
       ),
     );
