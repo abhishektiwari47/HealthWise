@@ -75,7 +75,7 @@ class _ResultPageState extends State<ResultPage> {
       child: Scaffold(
         appBar: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: Color.fromARGB(255, 35, 128, 39),
+            backgroundColor: Color.fromARGB(255, 17, 66, 19),
             title: Center(
               child: Text(
                 itemName.trim().toUpperCase(),
@@ -146,10 +146,10 @@ class EditedListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(5, 1, 5, 0),
+      padding: EdgeInsets.fromLTRB(1, 1, 1, 0),
       child: ListTile(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(4),
           // side: BorderSide(
           //   width: 1.5,
           //   //Tile Border
