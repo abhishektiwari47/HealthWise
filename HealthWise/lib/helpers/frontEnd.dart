@@ -77,8 +77,11 @@ class FruitCard extends StatelessWidget {
                   //   ),
                   // ),
                   child: dataAsString[0] != null
-                      ? ImageFromNetwork(dataAsString: dataAsString)
-                      : Icon(Icons.image),
+                      ? ImageFromNetwork(ulr: dataAsString[0])
+                      : Icon(
+                          Icons.image,
+                          color: Colors.white,
+                        ),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
@@ -104,15 +107,15 @@ class FruitCard extends StatelessWidget {
 class ImageFromNetwork extends StatelessWidget {
   const ImageFromNetwork({
     super.key,
-    required this.dataAsString,
+    required this.ulr,
   });
 
-  final List<String> dataAsString;
+  final String ulr;
 
   @override
   Widget build(BuildContext context) {
     return Image.network(
-      dataAsString[0],
+      ulr,
       fit: BoxFit.fill,
       loadingBuilder: (BuildContext context, Widget child,
           ImageChunkEvent? loadingProgress) {
