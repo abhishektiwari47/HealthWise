@@ -458,17 +458,16 @@ class _HomeState extends State<Home> {
         Spacer(),
 
         Container(
-          color: primary_color,
-          child: SingleChildScrollView(
-              // controller: controller,
-              child: Text(
+          height: 20,
+          width: 100,
+          // decoration: BoxDecoration(
+          //     color: Colors.pink,
+          //     borderRadius: BorderRadius.all(Radius.circular(10))),
+          child: Text(
             result,
-            style: const TextStyle(
-                backgroundColor: Colors.black87,
-                fontSize: 10.0,
-                color: Colors.white),
+            style: const TextStyle(fontSize: 10.0, color: Colors.white),
             textAlign: TextAlign.center,
-          )),
+          ),
         ),
 
 //Camera Close Next Page
