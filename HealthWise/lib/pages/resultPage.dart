@@ -75,7 +75,7 @@ class _ResultPageState extends State<ResultPage> {
       child: Scaffold(
         appBar: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: Color.fromARGB(255, 17, 66, 19),
+            backgroundColor: Colors.pink,
             title: Center(
               child: Text(
                 itemName.trim().toUpperCase(),
@@ -89,22 +89,58 @@ class _ResultPageState extends State<ResultPage> {
           physics: ScrollPhysics(),
           child: Container(
             // color: Color.fromARGB(255, 73, 122, 76),
-            height: MediaQuery.of(context).size.height * 2.5,
+            height: MediaQuery.of(context).size.height * 3.7,
             child: Column(
               children: [
+                // Container(
+                //   child: Column(
+                //     children: [
+                //       Container(
+                //         height: 10,
+                //         width: 30,
+                //         color: Colors.red,
+                //       ),
+                //     ],
+                //   ),
+                //   color: Color.fromARGB(255, 150, 50, 50),
+                //   height: 200,
+                //   width: double.infinity,
+                // ),
                 Container(
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 10,
-                        width: 30,
-                        color: Colors.red,
-                      ),
-                    ],
-                  ),
-                  color: Color.fromARGB(255, 150, 50, 50),
-                  height: 200,
+                  height: 255,
                   width: double.infinity,
+                  color: Color.fromARGB(255, 241, 162, 162),
+                  child: dataAsString.length > 0
+                      ? ImageFromNetwork(ulr: dataAsString[20])
+                      : Icon(
+                          Icons.image,
+                          color: Colors.white,
+                        ),
+                ),
+
+                SuggestionTextTile(
+                    suggestionText:
+                        dataAsString.length > 0 ? dataAsString[21] : "...",
+                    colorOfIcon: Colors.green,
+                    colorOfTiles: Color.fromARGB(255, 240, 255, 242),
+                    leadingIcon: Icons.check),
+                SuggestionTextTile(
+                    suggestionText:
+                        dataAsString.length > 0 ? dataAsString[22] : "...",
+                    colorOfIcon: Colors.red,
+                    colorOfTiles: Color.fromARGB(255, 255, 240, 240),
+                    leadingIcon: Icons.clear),
+
+                Container(
+                  height: 100,
+                  child: Center(
+                      child: Text(
+                    "Nutrition Value",
+                    style: TextStyle(
+                        fontSize: 40,
+                        color: Color.fromARGB(255, 146, 60, 74),
+                        fontWeight: FontWeight.bold),
+                  )),
                 ),
                 Expanded(
                   child: Builder(
@@ -112,7 +148,7 @@ class _ResultPageState extends State<ResultPage> {
                       if (dataAsString.length > 0) {
                         return ListView.builder(
                             physics: NeverScrollableScrollPhysics(),
-                            itemCount: dataAsString.length,
+                            itemCount: 20,
                             itemBuilder: (BuildContext context, int index) {
                               return EditedListTile(
                                 dataAsString: dataAsString,
@@ -192,6 +228,67 @@ class EditedListTile extends StatelessWidget {
           style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Color.fromARGB(255, 255, 255, 255),
+              fontSize: 18),
+        ),
+      ),
+    );
+  }
+}
+
+class SuggestionTextTile extends StatelessWidget {
+  SuggestionTextTile({
+    super.key,
+    required this.suggestionText,
+    required this.colorOfIcon,
+    required this.leadingIcon,
+    required this.colorOfTiles,
+  });
+
+  final String suggestionText;
+
+  final IconData leadingIcon;
+  final Color colorOfIcon, colorOfTiles;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(1, 10, 1, 10),
+      child: ListTile(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(4),
+          // side: BorderSide(
+          //   width: 1.5,
+          //   //Tile Border
+          //   color: Color.fromARGB(255, 255, 227, 227),
+          // ),
+        ),
+
+        contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+
+        //Tile Color
+        tileColor: colorOfTiles,
+        leading: Container(
+            height: 30,
+            width: 30,
+            decoration: BoxDecoration(
+                color: colorOfIcon,
+                borderRadius: BorderRadius.all(Radius.circular(15))),
+            child: Center(
+                child: Icon(
+              leadingIcon,
+              color: Colors.white,
+            ))),
+        // trailing: const Text(
+        //   "per 100g",
+        //   style: TextStyle(
+        //       color: Color.fromARGB(255, 85, 141, 87),
+        //       fontSize: 15),
+        // ),
+        title: Text(
+          suggestionText,
+          style: TextStyle(
+              fontWeight: FontWeight.normal,
+              color: Color.fromARGB(255, 80, 80, 80),
               fontSize: 18),
         ),
       ),
