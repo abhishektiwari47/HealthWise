@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class User {
   String id = '';
   String name = '';
@@ -19,3 +21,7 @@ class User {
 String itemName = '';
 
 List<String> CardFruitList = ["Apple", "Banana", "Carrot"];
+
+final Color bgColor = Color.fromARGB(255, 253, 239, 238);
+
+final Color textColor = Color.fromARGB(255, 253, 126, 153);
