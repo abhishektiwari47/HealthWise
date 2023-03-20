@@ -24,9 +24,10 @@ class FruitCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 500,
-      width: 340,
+      height: 400,
+      width: 320,
       decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(20)),
         color: Color(0xFFffffff),
         boxShadow: [
           BoxShadow(
@@ -36,37 +37,46 @@ class FruitCard extends StatelessWidget {
           )
         ],
       ),
+      //FruitCard title
       child: Column(
         children: [
-          Container(
-            height: 50,
-            width: double.infinity,
-            color: Color.fromARGB(255, 253, 126, 153),
-            child: Center(
-              child: dataAsString.length > 0
-                  ? Text(
-                      dataAsString[2],
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        fontSize: 25,
-                      ),
-                    )
-                  : Text(
-                      '. . .',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        fontSize: 25,
-                      ),
-                    ),
-            ),
+          // Container(
+          //   height: 40,
+          //   width: 300,
+          //   color: Colors.pink,
+          //   child: Center(
+          //     child: dataAsString.length > 0
+          //         ? Text(
+          //             dataAsString[2],
+          //             style: TextStyle(
+          //               color: Color.fromARGB(255, 255, 255, 255),
+          //               fontSize: 20,
+          //             ),
+          //           )
+          //         : Text(
+          //             '. . .',
+          //             style: TextStyle(
+          //               color: Color.fromARGB(255, 253, 126, 153),
+          //               fontSize: 25,
+          //             ),
+          //           ),
+          //   ),
+          // ),
+          SizedBox(
+            height: 20,
           ),
           Container(
             child: Column(
               children: [
                 Container(
-                  color: Color.fromARGB(255, 255, 248, 248),
-                  height: 225,
-                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    color: Color.fromARGB(255, 255, 248, 248),
+                  ),
+                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+
+                  height: 200,
+                  width: 300,
                   // decoration: BoxDecoration(
                   //   image: DecorationImage(
                   //     fit: BoxFit.fill,
@@ -77,19 +87,21 @@ class FruitCard extends StatelessWidget {
                   //   ),
                   // ),
                   child: dataAsString[0] != null
-                      ? ImageFromNetwork(ulr: dataAsString[0])
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: ImageFromNetwork(ulr: dataAsString[0]))
                       : Icon(
                           Icons.image,
                           color: Colors.white,
                         ),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                   child: Text(
                     dataAsString[1],
                     style: TextStyle(
                       color: Color.fromARGB(255, 80, 80, 80),
-                      fontSize: 20,
+                      fontSize: 15,
                     ),
                   ),
                 )
@@ -138,3 +150,5 @@ class ImageFromNetwork extends StatelessWidget {
 
 
 //Floating Buttons As functions
+
+
