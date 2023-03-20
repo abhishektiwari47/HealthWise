@@ -1,5 +1,7 @@
 import 'dart:math';
+import 'package:Healthwise/helpers/additionalFeatures.dart';
 import 'package:Healthwise/helpers/backEnd.dart';
+import 'package:Healthwise/helpers/userProgress.dart';
 import 'package:Healthwise/pages/listPage.dart';
 import 'package:Healthwise/pages/resultPage.dart';
 import 'package:Healthwise/helpers/dataVariables.dart';
@@ -69,13 +71,11 @@ class _HomeState extends State<Home> {
 
   int randomNumber1 = Random().nextInt(3);
   getUserById() async {
-    // print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
     int randomNumber = Random().nextInt(3);
     while (randomNumber == randomNumber1) {
       randomNumber = Random().nextInt(3);
     }
     randomNumber1 = randomNumber;
-    // print("randomNumber" + randomNumber.toString());
     String id = CardFruitList[randomNumber];
     print(id);
     await fruitQuoteDoc.doc(id).get().then((DocumentSnapshot doc) {
@@ -115,12 +115,11 @@ class _HomeState extends State<Home> {
       // for (var k in dataAsString) {
       //   print(k);
       // }
-      print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%the data%%%%%%%%%%%%%%%%%%%%%%%");
-      print(dataAsString);
+
+      // print(dataAsString);
 
       id = '';
       setState(() {});
-      print('^^^^^^^^^^^^^^^^^^^^^^^^^^SetStateCalled^^^^^^^^^^^^^^^^^^^^^^^');
     });
   }
 
@@ -171,7 +170,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light,
+      value: SystemUiOverlayStyle.dark,
       child: Scaffold(
           resizeToAvoidBottomInset: false,
           floatingActionButtonLocation:
@@ -183,55 +182,89 @@ class _HomeState extends State<Home> {
                   },
                   floatingIcon: Icons.camera)
               : CloseCameraAndSearch(cameraController),
-          // appBar:
-          //     AppBar(backgroundColor: primary_color, title: application_name),
           body: SafeArea(
-            child: Stack(children: [
-              Container(
-                constraints: const BoxConstraints.expand(),
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 255, 232, 244),
-                  image: DecorationImage(
-                      image: AssetImage("assets/SVG/BackGround2.png"),
-                      fit: BoxFit.fill),
+            bottom: false,
+            child: Center(
+              child: Stack(children: [
+                Container(
+                  constraints: const BoxConstraints.expand(),
+                  decoration: BoxDecoration(
+                    color: bgColor,
+                    // image: DecorationImage(
+                    //     image: AssetImage("assets/SVG/BackGround2.png"),
+                    //     fit: BoxFit.fill),
+                  ),
                 ),
-              ),
-              Container(
-                // height: 560,
-                child: Container(
-                    height: double.infinity,
-                    width: 360,
-                    child: imgCamera == null
-                        ? Column(
-                            children: [
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Container(
-                                height: 50,
-                                width: 340,
-                                padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
-                                decoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                  //
-                                  color: Color.fromARGB(255, 255, 255, 255),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromARGB(255, 253, 209, 209),
-                                      blurRadius: 3.0, // soften the shadow
-                                      spreadRadius: 3.0, //extend the shadow
-                                    )
-                                  ],
+                Container(
+                  // height: 560,
+                  child: Container(
+                      height: double.infinity,
+                      width: 360,
+                      child: imgCamera == null
+                          //here to write the code for middle area
+                          ? Column(
+                              children: [
+                                const SizedBox(
+                                  height: 18,
                                 ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      height: 40,
-                                      width: 240,
-                                      child: TextField(
-                                        textInputAction: TextInputAction.search,
-                                        onSubmitted: (term) async {
+                                //search bar code
+                                Container(
+                                  height: 45,
+                                  width: 310,
+                                  padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
+                                  decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20)),
+                                    //
+                                    color: Color.fromARGB(255, 255, 255, 255),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            Color.fromARGB(255, 253, 209, 209),
+                                        blurRadius: 3.0, // soften the shadow
+                                        spreadRadius: 3.0, //extend the shadow
+                                      )
+                                    ],
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        height: 40,
+                                        width: 210,
+                                        child: TextField(
+                                          textInputAction:
+                                              TextInputAction.search,
+                                          onSubmitted: (term) async {
+                                            print(
+                                                "##########################################" +
+                                                    searchItem.text);
+                                            result = searchItem.text;
+
+                                            if (result != '') {
+                                              print(
+                                                  "##########################################" +
+                                                      result);
+                                              itemName = result;
+                                              print(itemName);
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          ResultPage()));
+                                            }
+                                          },
+                                          controller: searchItem,
+                                          decoration: InputDecoration(
+                                              border: InputBorder.none,
+                                              hintText: 'Search Pomegranate'),
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      TextButton(
+                                        style: ButtonStyle(
+                                            alignment:
+                                                AlignmentDirectional.centerEnd),
+                                        onPressed: () async {
                                           print(
                                               "##########################################" +
                                                   searchItem.text);
@@ -250,164 +283,98 @@ class _HomeState extends State<Home> {
                                                         ResultPage()));
                                           }
                                         },
-                                        controller: searchItem,
-                                        decoration: InputDecoration(
-                                            border: InputBorder.none,
-                                            hintText: 'Search Pomegranate'),
+                                        child: Icon(
+                                          Icons.search,
+                                          color: Color.fromARGB(
+                                              255, 253, 126, 153),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 18,
+                                ),
+                                //Fruit Card area
+                                Builder(builder: (context) {
+                                  if (dataAsString.length > 0) {
+                                    return Center(
+                                        child: GestureDetector(
+                                      onDoubleTap: () => {
+                                        dataAsString.clear(),
+                                        getUserById(),
+                                      },
+                                      child:
+                                          FruitCard(dataAsString: dataAsString),
+                                    ));
+                                  } else {
+                                    return Center(
+                                        child: Container(
+                                      height: 400,
+                                      width: 320,
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20)),
+                                        color: Color(0xFFffffff),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Color.fromARGB(
+                                                255, 253, 209, 209),
+                                            blurRadius:
+                                                3.0, // soften the shadow
+                                            spreadRadius:
+                                                3.0, //extend the shadow
+                                          )
+                                        ],
                                       ),
+                                    ));
+                                  }
+                                }),
+                                const SizedBox(
+                                  height: 18,
+                                ),
+                                // BMI and 75 Days challange.
+                                Row(
+                                  children: [
+                                    Spacer(),
+                                    AdditionalFeatures(
+                                      emoji: '💪',
+                                      bottomName: 'Exersize',
                                     ),
                                     Spacer(),
-                                    TextButton(
-                                      style: ButtonStyle(
-                                          alignment:
-                                              AlignmentDirectional.centerEnd),
-                                      onPressed: () async {
-                                        print(
-                                            "##########################################" +
-                                                searchItem.text);
-                                        result = searchItem.text;
-
-                                        if (result != '') {
-                                          print(
-                                              "##########################################" +
-                                                  result);
-                                          itemName = result;
-                                          print(itemName);
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ResultPage()));
-                                        }
-                                      },
-                                      child: Icon(
-                                        Icons.search,
-                                        color:
-                                            Color.fromARGB(255, 253, 126, 153),
-                                      ),
-                                    )
+                                    AdditionalFeatures(
+                                      emoji: '🎯',
+                                      bottomName: 'Challange',
+                                    ),
+                                    Spacer(),
+                                    AdditionalFeatures(
+                                      emoji: '🥗',
+                                      bottomName: 'Planner',
+                                    ),
+                                    Spacer(),
                                   ],
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Builder(builder: (context) {
-                                print(
-                                    "***************builderbhai************************");
-                                if (dataAsString.length > 0) {
-                                  return Center(
-                                      child: GestureDetector(
-                                    onDoubleTap: () => {
-                                      dataAsString.clear(),
-                                      getUserById(),
-                                    },
-                                    child:
-                                        FruitCard(dataAsString: dataAsString),
-                                  ));
-                                } else {
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                }
-                                ;
-                              }),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                            ],
-                          )
-                        : AspectRatio(
-                            aspectRatio: cameraController!.value.aspectRatio,
-                            child: CameraPreview(cameraController!),
-                          )),
-              ),
-            ]),
-          )
-
-          //   body: Container(
-          //     decoration: BoxDecoration(),
-          //     child: Column(children: [
-          //       Stack(
-          //         children: [
-          //           Center(
-          //             child: Container(
-          //               margin: EdgeInsets.only(top: 100.0),
-          //               height: 220,
-          //               width: 320,
-          //               child: Container(),
-          //             ),
-          //           ),
-          //           Center(
-          //             child: TextButton(
-          //               onPressed: () {
-          //                 initCamera();
-          //               },
-          //               child: Container(
-          //                   margin: EdgeInsets.only(top: 5),
-          //                   height: 550,
-          //                   width: 360,
-          //                   child: imgCamera == null
-          //                       ? Container(
-          //                           height: 550,
-          //                           width: 360,
-          //                           child: Icon(
-          //                             Icons.photo_camera_front,
-          //                             color: Colors.pink,
-          //                             size: 60,
-          //                           ),
-          //                         )
-          //                       : AspectRatio(
-          //                           aspectRatio:
-          //                               cameraController!.value.aspectRatio,
-          //                           child: CameraPreview(cameraController!),
-          //                         )),
-          //             ),
-          //           )
-          //         ],
-          //       ),
-          //       Center(
-          //         child: Container(
-          //           color: primary_color,
-          //           margin: EdgeInsets.only(top: 10.0),
-          //           child: SingleChildScrollView(
-          //               // controller: controller,
-          //               child: Text(
-          //             result,
-          //             style: const TextStyle(
-          //                 backgroundColor: Colors.black87,
-          //                 fontSize: 10.0,
-          //                 color: Colors.white),
-          //             textAlign: TextAlign.center,
-          //           )),
-          //         ),
-          //       ),
-          //       ElevatedButton(
-          //           onPressed: () async {
-          //             if (result != '') {
-          //               await cameraController?.stopImageStream();
-          //               await cameraController?.pausePreview();
-          //               itemName = result.toString();
-          //               print("--------------------------------------------");
-          //               print(itemName);
-          //               Navigator.of(context).pushReplacement(
-          //                   MaterialPageRoute(builder: (context) => ResultPage()));
-          //             }
-          //           },
-          //           child: Container(
-          //             child: Text("Next"),
-          //             color: Colors.blue,
-          //           ))
-          //     ]),
-          //   ),
-          ),
+                                const SizedBox(
+                                  height: 18,
+                                ),
+                                UserProgress()
+                              ],
+                            )
+                          : AspectRatio(
+                              aspectRatio: cameraController!.value.aspectRatio,
+                              child: CameraPreview(cameraController!),
+                            )),
+                ),
+              ]),
+            ),
+          )),
     );
   }
 
   Padding FloatingButtons(
       {required callFunction, required IconData floatingIcon}) {
     return Padding(
-      padding: const EdgeInsets.all(30.0),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       child: Container(
         height: 50,
         width: 50,
