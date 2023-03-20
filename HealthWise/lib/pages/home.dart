@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:Healthwise/helpers/additionalFeatures.dart';
 import 'package:Healthwise/helpers/backEnd.dart';
+import 'package:Healthwise/helpers/footerFeatures.dart';
 import 'package:Healthwise/helpers/userProgress.dart';
 import 'package:Healthwise/pages/listPage.dart';
 import 'package:Healthwise/pages/resultPage.dart';
@@ -357,7 +358,11 @@ class _HomeState extends State<Home> {
                                 const SizedBox(
                                   height: 18,
                                 ),
-                                UserProgress()
+                                UserProgress(),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                FooterFeatures()
                               ],
                             )
                           : AspectRatio(
