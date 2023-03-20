@@ -75,13 +75,13 @@ class _ResultPageState extends State<ResultPage> {
       child: Scaffold(
         appBar: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: Colors.pink,
+            backgroundColor: bgColor,
             title: Center(
               child: Text(
                 itemName.trim().toUpperCase(),
                 style: TextStyle(
                     //Fruit Name
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: Colors.pink,
                     fontSize: 15),
               ),
             )),
