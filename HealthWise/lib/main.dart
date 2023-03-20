@@ -1,3 +1,4 @@
+import 'package:Healthwise/helpers/dataVariables.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,9 @@ Future<void> main() async {
   cameras = await availableCameras();
   await Firebase.initializeApp();
   runApp(const MyApp());
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: bgColor,
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -20,12 +24,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          // We have removed the appbar
-          appBarTheme: const AppBarTheme(
-            systemOverlayStyle: SystemUiOverlayStyle(
-                // statusBarColor: Color.fromARGB(255, 255, 177, 177),
-                statusBarBrightness: Brightness.light),
+          appBarTheme: AppBarTheme(
+            systemOverlayStyle:
+                SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
           ),
+
           // scaffoldBackgroundColor: Colors.white,
           textSelectionTheme: const TextSelectionThemeData(
             cursorColor: Color.fromARGB(255, 253, 126, 153),
