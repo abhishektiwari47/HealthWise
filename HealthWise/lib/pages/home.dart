@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:Healthwise/helpers/additionalFeatures.dart';
 import 'package:Healthwise/helpers/backEnd.dart';
 import 'package:Healthwise/helpers/footerFeatures.dart';
+import 'package:Healthwise/helpers/fruitCard.dart';
 import 'package:Healthwise/helpers/userProgress.dart';
 import 'package:Healthwise/pages/listPage.dart';
 import 'package:Healthwise/pages/resultPage.dart';
@@ -213,20 +214,7 @@ class _HomeState extends State<Home> {
                                   height: 45,
                                   width: 310,
                                   padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
-                                  decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20)),
-                                    //
-                                    color: Color.fromARGB(255, 255, 255, 255),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color:
-                                            Color.fromARGB(255, 253, 209, 209),
-                                        blurRadius: 3.0, // soften the shadow
-                                        spreadRadius: 3.0, //extend the shadow
-                                      )
-                                    ],
-                                  ),
+                                  decoration: mainWhiteBoxDecoration,
                                   child: Row(
                                     children: [
                                       Container(
@@ -313,21 +301,7 @@ class _HomeState extends State<Home> {
                                         child: Container(
                                       height: 400,
                                       width: 320,
-                                      decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20)),
-                                        color: Color(0xFFffffff),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color.fromARGB(
-                                                255, 253, 209, 209),
-                                            blurRadius:
-                                                3.0, // soften the shadow
-                                            spreadRadius:
-                                                3.0, //extend the shadow
-                                          )
-                                        ],
-                                      ),
+                                      decoration: mainWhiteBoxDecoration,
                                     ));
                                   }
                                 }),
