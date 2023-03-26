@@ -22,8 +22,8 @@ class _AdditionalFeaturesState extends State<AdditionalFeatures> {
     return GestureDetector(
       onTap: () => {},
       child: Container(
-        height: 90,
-        width: 90,
+        height: 75,
+        width: 85,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           color: Colors.white,
@@ -41,7 +41,7 @@ class _AdditionalFeaturesState extends State<AdditionalFeatures> {
             Spacer(),
             Text(
               widget.emoji,
-              style: TextStyle(color: textColor, fontSize: 30),
+              style: TextStyle(color: textColor, fontSize: 28),
             ),
             Spacer(),
             Text(
