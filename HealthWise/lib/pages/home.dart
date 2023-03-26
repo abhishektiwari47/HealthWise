@@ -299,7 +299,7 @@ class _HomeState extends State<Home> {
                                   } else {
                                     return Center(
                                         child: Container(
-                                      height: 400,
+                                      height: 380,
                                       width: 320,
                                       decoration: mainWhiteBoxDecoration,
                                     ));
@@ -314,7 +314,7 @@ class _HomeState extends State<Home> {
                                     Spacer(),
                                     AdditionalFeatures(
                                       emoji: '💪',
-                                      bottomName: 'Exersize',
+                                      bottomName: 'Exercise',
                                     ),
                                     Spacer(),
                                     AdditionalFeatures(
@@ -332,7 +332,9 @@ class _HomeState extends State<Home> {
                                 const SizedBox(
                                   height: 18,
                                 ),
-                                UserProgress(),
+                                UserProgress(
+                                  challangeRank: '---/---',
+                                ),
                                 SizedBox(
                                   height: 12,
                                 ),
