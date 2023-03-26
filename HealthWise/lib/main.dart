@@ -4,11 +4,33 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:Healthwise/pages/home.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_connect/http/src/request/request.dart';
+
+import 'package:permission_handler/permission_handler.dart';
+
+Future<void> checkPermission() async {
+  // get the current permission status
+  PermissionStatus permission = await Permission.activityRecognition.status;
+
+  if (permission == PermissionStatus.denied) {
+    // if permission is denied, request permission at runtime
+    permission = await Permission.activityRecognition.request();
+  }
+
+  if (permission == PermissionStatus.granted) {
+    // permission granted
+    print('Permission granted ==============================');
+  } else {
+    // permission denied
+    print('Permission denied');
+    openAppSettings();
+  }
+}
 
 List<CameraDescription>? cameras;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  checkPermission();
   cameras = await availableCameras();
   await Firebase.initializeApp();
   runApp(const MyApp());
