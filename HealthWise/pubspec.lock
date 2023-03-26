@@ -33,6 +33,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.10.0"
+  auto_route:
+    dependency: "direct main"
+    description:
+      name: auto_route
+      sha256: "89a5fcc4ea1bb13a13e3c0cf965a6600c2879c6c0719b57075bb5e9039559998"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.3"
   boolean_selector:
     dependency: transitive
     description:
