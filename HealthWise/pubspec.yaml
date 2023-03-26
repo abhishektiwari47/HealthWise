@@ -35,7 +35,9 @@ flutter:
 
 flutter_native_splash:
   image: assets/SVG/logo.png
-  color: FFC0CB
+  color: fff2f4
+  #for changes in this there is a command in the docs : flutter pub run flutter_native_splash:create
+  
 
 
 
