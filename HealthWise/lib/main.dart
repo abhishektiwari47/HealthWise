@@ -30,13 +30,19 @@ Future<void> checkPermission() async {
 List<CameraDescription>? cameras;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //     statusBarBrightness: Brightness.light,
+  //     statusBarIconBrightness: Brightness.light,
+  //     systemStatusBarContrastEnforced: true
+  //     // statusBarColor: bgColor,
+  //     ));
   checkPermission();
   cameras = await availableCameras();
   await Firebase.initializeApp();
   runApp(const MyApp());
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: bgColor,
-  ));
+      statusBarColor: bgColor, statusBarIconBrightness: Brightness.dark));
 }
 
 class MyApp extends StatelessWidget {
@@ -46,10 +52,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          appBarTheme: AppBarTheme(
-            systemOverlayStyle:
-                SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
-          ),
+          // appBarTheme: AppBarTheme(
+          //   systemOverlayStyle:
+          //       SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+          // ),
 
           // scaffoldBackgroundColor: Colors.white,
           textSelectionTheme: const TextSelectionThemeData(

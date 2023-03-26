@@ -171,89 +171,54 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark,
-      child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: imgCamera == null
-              ? FloatingButtons(
-                  callFunction: () {
-                    initCamera();
-                  },
-                  floatingIcon: Icons.camera)
-              : CloseCameraAndSearch(cameraController),
-          body: SafeArea(
-            bottom: false,
-            child: Center(
-              child: Stack(children: [
-                Container(
-                  constraints: const BoxConstraints.expand(),
-                  decoration: BoxDecoration(
-                    color: bgColor,
-                    // image: DecorationImage(
-                    //     image: AssetImage("assets/SVG/BackGround2.png"),
-                    //     fit: BoxFit.fill),
-                  ),
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: imgCamera == null
+            ? FloatingButtons(
+                callFunction: () {
+                  initCamera();
+                },
+                floatingIcon: Icons.camera)
+            : CloseCameraAndSearch(cameraController),
+        body: SafeArea(
+          child: Center(
+            child: Stack(children: [
+              Container(
+                constraints: const BoxConstraints.expand(),
+                decoration: BoxDecoration(
+                  color: bgColor,
+                  // image: DecorationImage(
+                  //     image: AssetImage("assets/SVG/BackGround2.png"),
+                  //     fit: BoxFit.fill),
                 ),
-                Container(
-                  // height: 560,
-                  child: Container(
-                      height: double.infinity,
-                      width: 360,
-                      child: imgCamera == null
-                          //here to write the code for middle area
-                          ? Column(
-                              children: [
-                                const SizedBox(
-                                  height: 18,
-                                ),
-                                //search bar code
-                                Container(
-                                  height: 45,
-                                  width: 310,
-                                  padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
-                                  decoration: mainWhiteBoxDecoration,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: 40,
-                                        width: 210,
-                                        child: TextField(
-                                          textInputAction:
-                                              TextInputAction.search,
-                                          onSubmitted: (term) async {
-                                            print(
-                                                "##########################################" +
-                                                    searchItem.text);
-                                            result = searchItem.text;
-
-                                            if (result != '') {
-                                              print(
-                                                  "##########################################" +
-                                                      result);
-                                              itemName = result;
-                                              print(itemName);
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ResultPage()));
-                                            }
-                                          },
-                                          controller: searchItem,
-                                          decoration: InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: 'Search Pomegranate'),
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      TextButton(
-                                        style: ButtonStyle(
-                                            alignment:
-                                                AlignmentDirectional.centerEnd),
-                                        onPressed: () async {
+              ),
+              Container(
+                // height: 560,
+                child: Container(
+                    height: double.infinity,
+                    width: 360,
+                    child: imgCamera == null
+                        //here to write the code for middle area
+                        ? Column(
+                            children: [
+                              const SizedBox(
+                                height: 18,
+                              ),
+                              //search bar code
+                              Container(
+                                height: 45,
+                                width: 310,
+                                padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
+                                decoration: mainWhiteBoxDecoration,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 210,
+                                      child: TextField(
+                                        textInputAction: TextInputAction.search,
+                                        onSubmitted: (term) async {
                                           print(
                                               "##########################################" +
                                                   searchItem.text);
@@ -272,84 +237,113 @@ class _HomeState extends State<Home> {
                                                         ResultPage()));
                                           }
                                         },
-                                        child: Icon(
-                                          Icons.search,
-                                          color: Color.fromARGB(
-                                              255, 253, 126, 153),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 18,
-                                ),
-                                //Fruit Card area
-                                Builder(builder: (context) {
-                                  if (dataAsString.length > 0) {
-                                    return Center(
-                                        child: GestureDetector(
-                                      onDoubleTap: () => {
-                                        dataAsString.clear(),
-                                        getUserById(),
+                                        controller: searchItem,
+                                        decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: 'Search Pomegranate'),
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    TextButton(
+                                      style: ButtonStyle(
+                                          alignment:
+                                              AlignmentDirectional.centerEnd),
+                                      onPressed: () async {
+                                        print(
+                                            "##########################################" +
+                                                searchItem.text);
+                                        result = searchItem.text;
+
+                                        if (result != '') {
+                                          print(
+                                              "##########################################" +
+                                                  result);
+                                          itemName = result;
+                                          print(itemName);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ResultPage()));
+                                        }
                                       },
-                                      child:
-                                          FruitCard(dataAsString: dataAsString),
-                                    ));
-                                  } else {
-                                    return Center(
-                                        child: Container(
-                                      height: 380,
-                                      width: 320,
-                                      decoration: mainWhiteBoxDecoration,
-                                    ));
-                                  }
-                                }),
-                                const SizedBox(
-                                  height: 18,
-                                ),
-                                // BMI and 75 Days challange.
-                                Row(
-                                  children: [
-                                    Spacer(),
-                                    AdditionalFeatures(
-                                      emoji: '💪',
-                                      bottomName: 'Exercise',
-                                    ),
-                                    Spacer(),
-                                    AdditionalFeatures(
-                                      emoji: '🎯',
-                                      bottomName: 'Challange',
-                                    ),
-                                    Spacer(),
-                                    AdditionalFeatures(
-                                      emoji: '🥗',
-                                      bottomName: 'Planner',
-                                    ),
-                                    Spacer(),
+                                      child: Icon(
+                                        Icons.search,
+                                        color:
+                                            Color.fromARGB(255, 253, 126, 153),
+                                      ),
+                                    )
                                   ],
                                 ),
-                                const SizedBox(
-                                  height: 18,
-                                ),
-                                UserProgress(
-                                  challangeRank: '---/---',
-                                ),
-                                SizedBox(
-                                  height: 12,
-                                ),
-                                FooterFeatures()
-                              ],
-                            )
-                          : AspectRatio(
-                              aspectRatio: cameraController!.value.aspectRatio,
-                              child: CameraPreview(cameraController!),
-                            )),
-                ),
-              ]),
-            ),
-          )),
-    );
+                              ),
+                              const SizedBox(
+                                height: 18,
+                              ),
+                              //Fruit Card area
+                              Builder(builder: (context) {
+                                if (dataAsString.length > 0) {
+                                  return Center(
+                                      child: GestureDetector(
+                                    onDoubleTap: () => {
+                                      dataAsString.clear(),
+                                      getUserById(),
+                                    },
+                                    child:
+                                        FruitCard(dataAsString: dataAsString),
+                                  ));
+                                } else {
+                                  return Center(
+                                      child: Container(
+                                    height: 380,
+                                    width: 320,
+                                    decoration: mainWhiteBoxDecoration,
+                                  ));
+                                }
+                              }),
+                              const SizedBox(
+                                height: 18,
+                              ),
+                              // BMI and 75 Days challange.
+                              Row(
+                                children: [
+                                  Spacer(),
+                                  AdditionalFeatures(
+                                    emoji: '💪',
+                                    bottomName: 'Exercise',
+                                  ),
+                                  Spacer(),
+                                  AdditionalFeatures(
+                                    emoji: '🎯',
+                                    bottomName: 'Challange',
+                                  ),
+                                  Spacer(),
+                                  AdditionalFeatures(
+                                    emoji: '🥗',
+                                    bottomName: 'Planner',
+                                  ),
+                                  Spacer(),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 18,
+                              ),
+                              UserProgress(
+                                challangeRank: '---/---',
+                              ),
+                              SizedBox(
+                                height: 12,
+                              ),
+                              FooterFeatures()
+                            ],
+                          )
+                        : AspectRatio(
+                            aspectRatio: cameraController!.value.aspectRatio,
+                            child: CameraPreview(cameraController!),
+                          )),
+              ),
+            ]),
+          ),
+        ));
   }
 
   Padding FloatingButtons(
