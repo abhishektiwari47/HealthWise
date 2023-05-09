@@ -5,7 +5,7 @@ import 'package:Healthwise/helpers/footerFeatures.dart';
 import 'package:Healthwise/helpers/fruitCard.dart';
 import 'package:Healthwise/helpers/userProgress.dart';
 import 'package:Healthwise/pages/challenges.dart';
-import 'package:Healthwise/pages/exercisePage.dart';
+import 'package:Healthwise/pages/exercise.dart';
 import 'package:Healthwise/pages/listPage.dart';
 import 'package:Healthwise/pages/planner.dart';
 import 'package:Healthwise/pages/resultPage.dart';
