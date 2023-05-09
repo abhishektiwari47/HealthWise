@@ -1,4 +1,9 @@
+import 'dart:async';
+
+import 'package:Healthwise/pages/profile.dart';
 import 'package:flutter/material.dart';
+// import 'package:get/get_navigation/get_navigation.dart';
+import 'package:Healthwise/pages/timer.dart';
 
 class FooterFeatures extends StatefulWidget {
   const FooterFeatures({
@@ -36,10 +41,13 @@ class _FooterFeaturesState extends State<FooterFeatures> {
                   splashColor: Color.fromARGB(255, 255, 223, 223),
                   // tooltip: 'Opening Camera',
                   icon: Icon(
-                    Icons.water_drop,
+                    Icons.hourglass_bottom,
                     color: Color.fromARGB(255, 255, 254, 254),
                   ),
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Timer()));
+                  }),
             ),
           ),
         ),
@@ -69,7 +77,10 @@ class _FooterFeaturesState extends State<FooterFeatures> {
                     Icons.person,
                     color: Color.fromARGB(255, 255, 254, 254),
                   ),
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => UserProfile()));
+                  }),
             ),
           ),
         ),

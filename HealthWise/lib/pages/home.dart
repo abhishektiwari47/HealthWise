@@ -4,9 +4,13 @@ import 'package:Healthwise/helpers/backEnd.dart';
 import 'package:Healthwise/helpers/footerFeatures.dart';
 import 'package:Healthwise/helpers/fruitCard.dart';
 import 'package:Healthwise/helpers/userProgress.dart';
+import 'package:Healthwise/pages/challenges.dart';
+import 'package:Healthwise/pages/exercisePage.dart';
 import 'package:Healthwise/pages/listPage.dart';
+import 'package:Healthwise/pages/planner.dart';
 import 'package:Healthwise/pages/resultPage.dart';
 import 'package:Healthwise/helpers/dataVariables.dart';
+import 'package:Healthwise/pages/timer.dart';
 import 'package:camera/camera.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -308,19 +312,19 @@ class _HomeState extends State<Home> {
                                 children: [
                                   Spacer(),
                                   AdditionalFeatures(
-                                    emoji: '💪',
-                                    bottomName: 'Exercise',
-                                  ),
+                                      emoji: '💪',
+                                      bottomName: 'Exercise',
+                                      navigation: Exercise()),
                                   Spacer(),
                                   AdditionalFeatures(
-                                    emoji: '🎯',
-                                    bottomName: 'Challange',
-                                  ),
+                                      emoji: '🎯',
+                                      bottomName: 'Challange',
+                                      navigation: Challange()),
                                   Spacer(),
                                   AdditionalFeatures(
-                                    emoji: '🥗',
-                                    bottomName: 'Planner',
-                                  ),
+                                      emoji: '🥗',
+                                      bottomName: 'Planner',
+                                      navigation: Planner()),
                                   Spacer(),
                                 ],
                               ),
@@ -328,7 +332,7 @@ class _HomeState extends State<Home> {
                                 height: 18,
                               ),
                               UserProgress(
-                                challangeRank: '---/---',
+                                exerciseStreak: '---',
                               ),
                               SizedBox(
                                 height: 12,
