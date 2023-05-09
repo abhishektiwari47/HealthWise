@@ -273,8 +273,7 @@ class _HomeState extends State<Home> {
                                       },
                                       child: Icon(
                                         Icons.search,
-                                        color:
-                                            Color.fromARGB(255, 253, 126, 153),
+                                        color: iconColor,
                                       ),
                                     )
                                   ],
@@ -368,15 +367,15 @@ class _HomeState extends State<Home> {
           child: Material(
             clipBehavior: Clip.hardEdge,
             borderRadius: BorderRadius.all(Radius.circular(50)),
-            color: Colors.pink,
+            color: iconColor,
             child: IconButton(
                 iconSize: 30,
                 splashRadius: 120,
-                splashColor: Color.fromARGB(255, 255, 223, 223),
+                splashColor: splashColor,
                 // tooltip: 'Opening Camera',
                 icon: Icon(
                   floatingIcon,
-                  color: Color.fromARGB(255, 255, 254, 254),
+                  color: whiteColor,
                 ),
                 onPressed: () {
                   callFunction();
@@ -411,7 +410,7 @@ class _HomeState extends State<Home> {
           //     borderRadius: BorderRadius.all(Radius.circular(10))),
           child: Text(
             result,
-            style: const TextStyle(fontSize: 10.0, color: Colors.white),
+            style: const TextStyle(fontSize: 10.0, color: whiteColor),
             textAlign: TextAlign.center,
           ),
         ),
