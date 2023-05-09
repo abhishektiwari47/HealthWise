@@ -1,4 +1,4 @@
-import 'package:Healthwise/helpers/frontEnd.dart';
+import 'package:Healthwise/helpers/dataVariables.dart';
 import 'package:flutter/material.dart';
 import 'package:pedometer/pedometer.dart';
 
@@ -112,11 +112,8 @@ class UserProgressDataBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(7),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(2)),
-        color: Color.fromARGB(255, 253, 250, 250),
-      ),
+      padding: const EdgeInsets.all(7),
+      decoration: fadedBoxDecoration,
       height: 75,
       width: 145,
       child: Column(
@@ -125,8 +122,8 @@ class UserProgressDataBox extends StatelessWidget {
           Center(
               child: Text(
             boxText,
-            style: TextStyle(
-              color: Color.fromARGB(255, 255, 118, 118),
+            style: const TextStyle(
+              color: textColorGreen,
               fontSize: 18,
               fontWeight: FontWeight.normal,
               fontStyle: FontStyle.normal,
@@ -137,7 +134,7 @@ class UserProgressDataBox extends StatelessWidget {
             child: Text(
               boxName,
               style: TextStyle(
-                color: Color.fromARGB(255, 179, 174, 174),
+                color: textColorGreyFaded,
               ),
             ),
           ),
