@@ -7,16 +7,17 @@ String formatDate(DateTime d) {
   return d.toString().substring(0, 19);
 }
 
+//this is not pushed
 class UserProgress extends StatefulWidget {
   UserProgress({
     super.key,
-    required this.challangeRank,
+    required this.exerciseStreak,
   });
 
-  String challangeRank = 'N/A';
+  String exerciseStreak = '0';
   @override
   State<UserProgress> createState() =>
-      _UserProgressState(challangeRank: challangeRank);
+      _UserProgressState(exerciseStreak: exerciseStreak);
 }
 
 class _UserProgressState extends State<UserProgress> {
@@ -72,10 +73,10 @@ class _UserProgressState extends State<UserProgress> {
   }
 
   _UserProgressState({
-    required this.challangeRank,
+    required this.exerciseStreak,
   });
 
-  String challangeRank;
+  String exerciseStreak;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -91,8 +92,8 @@ class _UserProgressState extends State<UserProgress> {
           ),
           Spacer(),
           UserProgressDataBox(
-            boxText: challangeRank,
-            boxName: 'Challange Rank',
+            boxText: exerciseStreak,
+            boxName: 'Exercise Streak',
           ),
         ],
       ),
