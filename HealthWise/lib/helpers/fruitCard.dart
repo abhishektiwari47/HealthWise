@@ -1,5 +1,6 @@
 import 'package:Healthwise/helpers/frontEnd.dart';
 import 'package:flutter/material.dart';
+import 'package:Healthwise/helpers/dataVariables.dart';
 
 class FruitCard extends StatelessWidget {
   const FruitCard({
@@ -47,10 +48,9 @@ class FruitCard extends StatelessWidget {
                 Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: Color.fromARGB(255, 255, 248, 248),
+                    color: fadedBgColor,
                   ),
                   margin: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-
                   height: 200,
                   width: 300,
                   // decoration: BoxDecoration(
@@ -66,9 +66,9 @@ class FruitCard extends StatelessWidget {
                       ? ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: ImageFromNetwork(ulr: dataAsString[0]))
-                      : Icon(
+                      : const Icon(
                           Icons.image,
-                          color: Colors.white,
+                          color: whiteColor,
                         ),
                 ),
                 SingleChildScrollView(
@@ -78,7 +78,7 @@ class FruitCard extends StatelessWidget {
                       dataAsString[1],
                       style: TextStyle(
                         wordSpacing: 2,
-                        color: Color.fromARGB(255, 80, 80, 80),
+                        color: textColorGrey,
                         fontSize: 15,
                       ),
                     ),
