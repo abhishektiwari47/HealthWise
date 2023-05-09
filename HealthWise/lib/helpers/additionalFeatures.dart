@@ -1,4 +1,5 @@
 import 'package:Healthwise/helpers/dataVariables.dart';
+import 'package:Healthwise/helpers/frontEnd.dart';
 import 'package:Healthwise/pages/timer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -30,31 +31,20 @@ class _AdditionalFeaturesState extends State<AdditionalFeatures> {
       child: Container(
         height: 75,
         width: 85,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Color.fromARGB(255, 253, 209, 209),
-              blurRadius: 3.0, // soften the shadow
-              spreadRadius: 3.0, //extend the shadow
-            )
-          ],
-        ),
+        decoration: mainWhiteBoxDecoration,
         child: Center(
             child: Column(
           children: [
             Spacer(),
             Text(
               widget.emoji,
-              style: TextStyle(color: textColor, fontSize: 28),
+              style: TextStyle(color: textColorGreen, fontSize: 28),
             ),
             Spacer(),
             Text(
               widget.bottomName,
               textAlign: TextAlign.left,
-              style: TextStyle(
-                  color: Color.fromARGB(255, 255, 159, 16), fontSize: 15),
+              style: TextStyle(color: textColorYellow, fontSize: 15),
             ),
             Spacer()
           ],
