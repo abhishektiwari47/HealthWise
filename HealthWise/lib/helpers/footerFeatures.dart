@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:Healthwise/helpers/dataVariables.dart';
 import 'package:Healthwise/pages/profile.dart';
 import 'package:flutter/material.dart';
 // import 'package:get/get_navigation/get_navigation.dart';
@@ -34,15 +35,15 @@ class _FooterFeaturesState extends State<FooterFeatures> {
             child: Material(
               clipBehavior: Clip.hardEdge,
               borderRadius: BorderRadius.all(Radius.circular(50)),
-              color: Colors.pink,
+              color: iconColor,
               child: IconButton(
                   iconSize: 30,
                   splashRadius: 120,
-                  splashColor: Color.fromARGB(255, 255, 223, 223),
+                  splashColor: splashColor,
                   // tooltip: 'Opening Camera',
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.hourglass_bottom,
-                    color: Color.fromARGB(255, 255, 254, 254),
+                    color: whiteColor,
                   ),
                   onPressed: () {
                     Navigator.push(context,
@@ -67,15 +68,15 @@ class _FooterFeaturesState extends State<FooterFeatures> {
             child: Material(
               clipBehavior: Clip.hardEdge,
               borderRadius: BorderRadius.all(Radius.circular(50)),
-              color: Colors.pink,
+              color: iconColor,
               child: IconButton(
                   iconSize: 30,
                   splashRadius: 120,
-                  splashColor: Color.fromARGB(255, 255, 223, 223),
+                  splashColor: splashColor,
                   // tooltip: 'Opening Camera',
                   icon: Icon(
                     Icons.person,
-                    color: Color.fromARGB(255, 255, 254, 254),
+                    color: whiteColor,
                   ),
                   onPressed: () {
                     Navigator.push(context,
