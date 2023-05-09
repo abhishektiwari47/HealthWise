@@ -81,7 +81,7 @@ class _ResultPageState extends State<ResultPage> {
                 itemName.trim().toUpperCase(),
                 style: TextStyle(
                     //Fruit Name
-                    color: Colors.pink,
+                    color: iconColor,
                     fontSize: 15),
               ),
             )),
@@ -122,13 +122,13 @@ class _ResultPageState extends State<ResultPage> {
                     suggestionText:
                         dataAsString.length > 0 ? dataAsString[21] : "...",
                     colorOfIcon: Colors.green,
-                    colorOfTiles: Color.fromARGB(255, 240, 255, 242),
+                    colorOfTiles: positivePointColor,
                     leadingIcon: Icons.check),
                 SuggestionTextTile(
                     suggestionText:
                         dataAsString.length > 0 ? dataAsString[22] : "...",
                     colorOfIcon: Colors.red,
-                    colorOfTiles: Color.fromARGB(255, 255, 240, 240),
+                    colorOfTiles: negetivePointColor,
                     leadingIcon: Icons.clear),
 
                 Container(
@@ -138,7 +138,7 @@ class _ResultPageState extends State<ResultPage> {
                     "Nutrition Value",
                     style: TextStyle(
                         fontSize: 40,
-                        color: Color.fromARGB(255, 146, 60, 74),
+                        color: specialTileColor,
                         fontWeight: FontWeight.bold),
                   )),
                 ),
@@ -198,23 +198,23 @@ class EditedListTile extends StatelessWidget {
           "per 100 gram",
           style: TextStyle(
             //subtitle
-            color: Color.fromARGB(255, 255, 184, 184),
+            color: whiteColor,
           ),
         ),
         //Tile Color
-        tileColor: Color.fromARGB(255, 146, 60, 74),
+        tileColor: specialTileColor,
         leading: Container(
             height: 30,
             width: 30,
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 255, 255, 255),
+                color: whiteColor,
                 borderRadius: BorderRadius.all(Radius.circular(15))),
             child: Center(
                 child: Text(
               (index + 1).toString(),
               style: TextStyle(
                   //index
-                  color: Color.fromARGB(255, 146, 60, 74),
+                  color: specialTileColor,
                   fontSize: 15),
             ))),
         // trailing: const Text(
@@ -226,9 +226,7 @@ class EditedListTile extends StatelessWidget {
         title: Text(
           dataAsString[index],
           style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 255, 255, 255),
-              fontSize: 18),
+              fontWeight: FontWeight.bold, color: whiteColor, fontSize: 18),
         ),
       ),
     );
@@ -276,7 +274,7 @@ class SuggestionTextTile extends StatelessWidget {
             child: Center(
                 child: Icon(
               leadingIcon,
-              color: Colors.white,
+              color: whiteColor,
             ))),
         // trailing: const Text(
         //   "per 100g",
@@ -288,7 +286,7 @@ class SuggestionTextTile extends StatelessWidget {
           suggestionText,
           style: TextStyle(
               fontWeight: FontWeight.normal,
-              color: Color.fromARGB(255, 80, 80, 80),
+              color: textColorGrey,
               fontSize: 18),
         ),
       ),
