@@ -1,4 +1,4 @@
-import 'package:Healthwise/helpers/dataVariables.dart';
+import 'package:Healthwise/helpers/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -17,52 +17,13 @@ class _ResultPageState extends State<ResultPage> {
   String objectToString = '';
 
   // List of string for storing..
-  var dataAsString = <String>[];
+  // var dataAsString = <String>[];
 
   @override
   void initState() {
     super.initState();
     // getUsers();
     getUserById();
-  }
-
-  getUserById() {
-    String id = itemName.toLowerCase().trim();
-
-    fruitInfoDoc.doc(id).get().then((DocumentSnapshot doc) {
-      // final x = doc.data();
-      // docId= doc.id;
-      objectToString = doc.data().toString();
-      String temp = '';
-      // print(doc.data());
-      // print(doc.id);
-      int i = 1;
-
-      bool end = false;
-      //We are just parsing the object into string.
-      while (objectToString[i] != '}') {
-        if (objectToString[i - 1] == ' ' && objectToString[i - 2] == ':') {
-          while (objectToString[i] != ',' && end != true) {
-            temp += objectToString[i];
-            if (objectToString[i + 1] != '}') {
-              i++;
-            } else {
-              end = true;
-            }
-          }
-          //Here I add all the strings to list...
-          // This line works fine.
-          dataAsString.add(temp);
-          temp = '';
-          print("The code below this line prints everything perfectly");
-          print(dataAsString.length);
-          print(dataAsString);
-        }
-        i++;
-      }
-
-      setState(() {});
-    });
   }
 
   @override
@@ -92,48 +53,32 @@ class _ResultPageState extends State<ResultPage> {
             height: MediaQuery.of(context).size.height * 3.7,
             child: Column(
               children: [
-                // Container(
-                //   child: Column(
-                //     children: [
-                //       Container(
-                //         height: 10,
-                //         width: 30,
-                //         color: Colors.red,
-                //       ),
-                //     ],
-                //   ),
-                //   color: Color.fromARGB(255, 150, 50, 50),
-                //   height: 200,
-                //   width: double.infinity,
-                // ),
                 Container(
                   height: 255,
                   width: double.infinity,
-                  color: Color.fromARGB(255, 241, 162, 162),
-                  child: dataAsString.length > 0
-                      ? ImageFromNetwork(ulr: dataAsString[20])
-                      : Icon(
+                  color: fadedBgColor,
+                  child: fruits.length > 0
+                      ? ImageFromNetwork(ulr: fruits[20].data.toString())
+                      : const Icon(
                           Icons.image,
-                          color: Colors.white,
+                          color: whiteColor,
                         ),
                 ),
-
                 SuggestionTextTile(
                     suggestionText:
-                        dataAsString.length > 0 ? dataAsString[21] : "...",
-                    colorOfIcon: Colors.green,
+                        fruits.length > 0 ? fruits[21].data.toString() : "...",
+                    colorOfIcon: iconColor,
                     colorOfTiles: positivePointColor,
                     leadingIcon: Icons.check),
                 SuggestionTextTile(
                     suggestionText:
-                        dataAsString.length > 0 ? dataAsString[22] : "...",
-                    colorOfIcon: Colors.red,
+                        fruits.length > 0 ? fruits[22].data.toString() : "...",
+                    colorOfIcon: iconColor2,
                     colorOfTiles: negetivePointColor,
                     leadingIcon: Icons.clear),
-
                 Container(
                   height: 100,
-                  child: Center(
+                  child: const Center(
                       child: Text(
                     "Nutrition Value",
                     style: TextStyle(
@@ -145,13 +90,14 @@ class _ResultPageState extends State<ResultPage> {
                 Expanded(
                   child: Builder(
                     builder: (context) {
-                      if (dataAsString.length > 0) {
+                      if (fruits.length > 0) {
+                        print("^^^^^^^^^^^^^^^^We entered this");
                         return ListView.builder(
                             physics: NeverScrollableScrollPhysics(),
-                            itemCount: 20,
+                            itemCount: fruits.length - 3,
                             itemBuilder: (BuildContext context, int index) {
                               return EditedListTile(
-                                dataAsString: dataAsString,
+                                fruits: fruits,
                                 index: index,
                               );
                             });
@@ -173,10 +119,9 @@ class _ResultPageState extends State<ResultPage> {
 }
 
 class EditedListTile extends StatelessWidget {
-  const EditedListTile(
-      {super.key, required this.dataAsString, required this.index});
+  const EditedListTile({super.key, required this.fruits, required this.index});
 
-  final List<String> dataAsString;
+  final List<Fruit> fruits;
   final int index;
 
   @override
@@ -224,7 +169,7 @@ class EditedListTile extends StatelessWidget {
         //       fontSize: 15),
         // ),
         title: Text(
-          dataAsString[index],
+          fruits[index].data.toString(),
           style: TextStyle(
               fontWeight: FontWeight.bold, color: whiteColor, fontSize: 18),
         ),
