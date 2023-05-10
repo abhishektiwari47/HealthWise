@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:Healthwise/helpers/additionalFeatures.dart';
+import 'package:Healthwise/helpers/additional_features.dart';
 import 'package:Healthwise/helpers/backEnd.dart';
 import 'package:Healthwise/helpers/footerFeatures.dart';
 import 'package:Healthwise/helpers/fruitCard.dart';
@@ -9,10 +9,11 @@ import 'package:Healthwise/pages/exercise.dart';
 import 'package:Healthwise/pages/listPage.dart';
 import 'package:Healthwise/pages/planner.dart';
 import 'package:Healthwise/pages/resultPage.dart';
-import 'package:Healthwise/helpers/dataVariables.dart';
+import 'package:Healthwise/helpers/constants.dart';
 import 'package:Healthwise/pages/timer.dart';
 import 'package:camera/camera.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:Healthwise/main.dart';
 import 'package:flutter/services.dart';
@@ -76,6 +77,7 @@ class _HomeState extends State<Home> {
   }
 
   int randomNumber1 = Random().nextInt(3);
+ 
   getUserById() async {
     int randomNumber = Random().nextInt(3);
     while (randomNumber == randomNumber1) {
@@ -126,7 +128,8 @@ class _HomeState extends State<Home> {
 
       id = '';
       setState(() {});
-    });
+    }
+    );
   }
 
   @override

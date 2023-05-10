@@ -1,6 +1,6 @@
 import 'package:Healthwise/helpers/frontEnd.dart';
 import 'package:flutter/material.dart';
-import 'package:Healthwise/helpers/dataVariables.dart';
+import 'package:Healthwise/helpers/constants.dart';
 
 class FruitCard extends StatelessWidget {
   const FruitCard({

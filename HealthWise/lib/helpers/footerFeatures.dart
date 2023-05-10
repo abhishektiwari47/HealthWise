@@ -1,9 +1,8 @@
 import 'dart:async';
 
-import 'package:Healthwise/helpers/dataVariables.dart';
+import 'package:Healthwise/helpers/constants.dart';
 import 'package:Healthwise/pages/profile.dart';
 import 'package:flutter/material.dart';
-// import 'package:get/get_navigation/get_navigation.dart';
 import 'package:Healthwise/pages/timer.dart';
 
 class FooterFeatures extends StatefulWidget {

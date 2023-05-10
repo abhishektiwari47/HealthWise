@@ -1,27 +1,5 @@
 import 'package:flutter/material.dart';
 
-class User {
-  String id = '';
-  String name = '';
-  String x = '';
-
-  User({
-    required this.id,
-    required this.name,
-    required this.x,
-  });
-
-  User.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    x = json['x'];
-  }
-}
-
-String itemName = '';
-
-List<String> CardFruitList = ["Apple", "Banana", "Carrot"];
-
 //Style Variables
 const Color bgColor = Color.fromARGB(255, 238, 253, 241);
 const Color fadedBgColor = Color.fromARGB(255, 248, 255, 251);
@@ -30,6 +8,7 @@ const Color textColorGrey = Color.fromARGB(255, 80, 80, 80);
 const Color textColorYellow = Color.fromARGB(255, 255, 159, 16);
 const Color textColorGreyFaded = Color.fromARGB(255, 179, 174, 174);
 const Color iconColor = Colors.green;
+const Color iconColor2 = Colors.red;
 const Color splashColor = Color.fromARGB(255, 223, 255, 224);
 const Color whiteColor = Colors.white;
 const Color blackColor = Colors.black;
