@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:Healthwise/helpers/additional_features.dart';
+import 'package:Healthwise/helpers/additionalFeatures.dart';
 import 'package:Healthwise/helpers/backEnd.dart';
 import 'package:Healthwise/helpers/footerFeatures.dart';
 import 'package:Healthwise/helpers/fruitCard.dart';
@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
   String objectToString = '';
 
   // List of string for storing..
-  var dataAsString = <String>[];
+  // var dataAsString = <String>[];
 
   bool isWorking = false;
   String result = '';
@@ -72,65 +72,64 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    getUserById();
+    getCardDataByID();
     loadModel();
+    setState(() {});
   }
 
   int randomNumber1 = Random().nextInt(3);
- 
-  getUserById() async {
-    int randomNumber = Random().nextInt(3);
-    while (randomNumber == randomNumber1) {
-      randomNumber = Random().nextInt(3);
-    }
-    randomNumber1 = randomNumber;
-    String id = CardFruitList[randomNumber];
-    print(id);
-    await fruitQuoteDoc.doc(id).get().then((DocumentSnapshot doc) {
-      // final x = doc.data();
-      // docId= doc.id;
-      objectToString = doc.data().toString();
-      print(objectToString);
-      String temp = '';
-      // print(doc.data());
-      // print(doc.id);
-      int i = 1;
 
-      bool end = false;
-      //We are just parsing the object into string.
-      while (objectToString[i] != '}') {
-        if (objectToString[i - 1] == ' ' && objectToString[i - 2] == ':') {
-          while (objectToString[i] != ',' && end != true) {
-            temp += objectToString[i];
-            if (objectToString[i + 1] != '}') {
-              i++;
-            } else {
-              end = true;
-            }
-          }
-          //Here I add all the strings to list...
-          // This line works fine.
-          dataAsString.add(temp);
+  // getUserById() async {
+  //   int randomNumber = Random().nextInt(3);
+  //   while (randomNumber == randomNumber1) {
+  //     randomNumber = Random().nextInt(3);
+  //   }
+  //   randomNumber1 = randomNumber;
+  //   String id = CardFruitList[randomNumber];
+  //   print(id);
+  //   await fruitQuoteDoc.doc(id).get().then((DocumentSnapshot doc) {
+  //     objectToString = doc.data().toString();
+  //     print("dkfjkdljfkldjfkldlkfjdkfjkdjfkdjkfjdkfkdfkdjf");
+  //     print(objectToString);
+  //     String temp = '';
+  //     // print(doc.data());
+  //     // print(doc.id);
+  //     int i = 1;
 
-          temp = '';
-          // print(dataAsString.length);
-          // print(dataAsString[0]);
-        }
-        i++;
-      }
-      end = false;
-      // print(dataAsString[0]);
-      // for (var k in dataAsString) {
-      //   print(k);
-      // }
+  //     bool end = false;
+  //     //We are just parsing the object into string.
+  //     while (objectToString[i] != '}') {
+  //       if (objectToString[i - 1] == ' ' && objectToString[i - 2] == ':') {
+  //         while (objectToString[i] != ',' && end != true) {
+  //           temp += objectToString[i];
+  //           if (objectToString[i + 1] != '}') {
+  //             i++;
+  //           } else {
+  //             end = true;
+  //           }
+  //         }
+  //         //Here I add all the strings to list...
+  //         // This line works fine.
+  //         dataAsString.add(temp);
 
-      // print(dataAsString);
+  //         temp = '';
+  //         // print(dataAsString.length);
+  //         // print(dataAsString[0]);
+  //       }
+  //       i++;
+  //     }
+  //     end = false;
+  //     // print(dataAsString[0]);
+  //     // for (var k in dataAsString) {
+  //     //   print(k);
+  //     // }
 
-      id = '';
-      setState(() {});
-    }
-    );
-  }
+  //     // print(dataAsString);
+
+  //     id = '';
+  //     setState(() {});
+  //   });
+  // }
 
   @override
   void dispose() async {
@@ -287,15 +286,20 @@ class _HomeState extends State<Home> {
                               ),
                               //Fruit Card area
                               Builder(builder: (context) {
-                                if (dataAsString.length > 0) {
+                                if (cardDataList.length > 0) {
                                   return Center(
                                       child: GestureDetector(
-                                    onDoubleTap: () => {
-                                      dataAsString.clear(),
-                                      getUserById(),
+                                    onDoubleTap: () async {
+                                      print(
+                                          "---------------------This the place where list will become empty-----------------------");
+                                      print(cardDataList.length);
+                                      cardDataList.clear();
+                                      print(cardDataList.length);
+                                      await getCardDataByID();
+                                      setState(() {});
                                     },
                                     child:
-                                        FruitCard(dataAsString: dataAsString),
+                                        FruitCard(cardDataList: cardDataList),
                                   ));
                                 } else {
                                   return Center(

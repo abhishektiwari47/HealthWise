@@ -30,6 +30,7 @@ class _ResultPageState extends State<ResultPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
+        fruits = [];
         Navigator.pop(context);
         return false;
       },

@@ -1,3 +1,4 @@
+import 'package:Healthwise/helpers/backEnd.dart';
 import 'package:Healthwise/helpers/frontEnd.dart';
 import 'package:flutter/material.dart';
 import 'package:Healthwise/helpers/constants.dart';
@@ -5,10 +6,10 @@ import 'package:Healthwise/helpers/constants.dart';
 class FruitCard extends StatelessWidget {
   const FruitCard({
     super.key,
-    required this.dataAsString,
+    required this.cardDataList,
   });
 
-  final List<String> dataAsString;
+  final List<String> cardDataList;
 
   @override
   Widget build(BuildContext context) {
@@ -19,29 +20,6 @@ class FruitCard extends StatelessWidget {
       //FruitCard title
       child: Column(
         children: [
-          // Container(
-          //   height: 40,
-          //   width: 300,
-          //   color: Colors.pink,
-          //   child: Center(
-          //     child: dataAsString.length > 0
-          //         ? Text(
-          //             dataAsString[2],
-          //             style: TextStyle(
-          //               color: Color.fromARGB(255, 255, 255, 255),
-          //               fontSize: 20,
-          //             ),
-          //           )
-          //         : Text(
-          //             '. . .',
-          //             style: TextStyle(
-          //               color: Color.fromARGB(255, 253, 126, 153),
-          //               fontSize: 25,
-          //             ),
-          //           ),
-          //   ),
-          // ),
-
           Container(
             child: Column(
               children: [
@@ -58,14 +36,13 @@ class FruitCard extends StatelessWidget {
                   //     fit: BoxFit.fill,
                   //     image: NetworkImage(
                   //       dataAsString[0]
-
                   //     ),
                   //   ),
                   // ),
-                  child: dataAsString[0] != null
+                  child: cardDataList[0] != null
                       ? ClipRRect(
                           borderRadius: BorderRadius.circular(20),
-                          child: ImageFromNetwork(ulr: dataAsString[0]))
+                          child: ImageFromNetwork(ulr: cardDataList[0]))
                       : const Icon(
                           Icons.image,
                           color: whiteColor,
@@ -75,7 +52,7 @@ class FruitCard extends StatelessWidget {
                   child: Container(
                     margin: EdgeInsets.symmetric(vertical: 0, horizontal: 25),
                     child: Text(
-                      dataAsString[1],
+                      cardDataList[1],
                       style: TextStyle(
                         wordSpacing: 2,
                         color: textColorGrey,
