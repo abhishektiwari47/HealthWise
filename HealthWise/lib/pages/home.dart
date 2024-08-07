@@ -246,7 +246,7 @@ class _HomeState extends State<Home> {
                                         controller: searchItem,
                                         decoration: InputDecoration(
                                             border: InputBorder.none,
-                                            hintText: 'Search Pomegranate'),
+                                            hintText: 'Search Apple'),
                                       ),
                                     ),
                                     Spacer(),
@@ -325,7 +325,7 @@ class _HomeState extends State<Home> {
                                   AdditionalFeatures(
                                       emoji: '🎯',
                                       bottomName: 'Challange',
-                                      navigation: Challange()),
+                                      navigation: Challenge()),
                                   Spacer(),
                                   AdditionalFeatures(
                                       emoji: '🥗',

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:Healthwise/helpers/constants.dart';
-import 'package:Healthwise/pages/profile.dart';
+import 'package:Healthwise/pages/bmiCalculator.dart';
 import 'package:flutter/material.dart';
 import 'package:Healthwise/pages/timer.dart';
 
@@ -46,7 +46,7 @@ class _FooterFeaturesState extends State<FooterFeatures> {
                   ),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Timer()));
+                        MaterialPageRoute(builder: (context) => TimerWidget()));
                   }),
             ),
           ),
@@ -74,12 +74,12 @@ class _FooterFeaturesState extends State<FooterFeatures> {
                   splashColor: splashColor,
                   // tooltip: 'Opening Camera',
                   icon: Icon(
-                    Icons.person,
+                    Icons.calculate,
                     color: whiteColor,
                   ),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => UserProfile()));
+                        MaterialPageRoute(builder: (context) => BMICalculator()));
                   }),
             ),
           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 //Style Variables
-const Color bgColor = Color.fromARGB(255, 238, 253, 241);
+const Color bgColor = Color.fromARGB(255, 194, 255, 206);
 const Color fadedBgColor = Color.fromARGB(255, 248, 255, 251);
 const Color textColorGreen = Color.fromARGB(255, 68, 195, 81);
 const Color textColorGrey = Color.fromARGB(255, 80, 80, 80);
@@ -38,3 +38,4 @@ Decoration fadedBoxDecoration = const BoxDecoration(
   borderRadius: BorderRadius.all(Radius.circular(2)),
   color: fadedBgColor,
 );
+
